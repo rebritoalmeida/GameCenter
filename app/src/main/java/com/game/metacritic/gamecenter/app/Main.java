@@ -4,7 +4,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import com.loopj.android.http.*;
 
+import org.apache.http.Header;
+
+import java.io.UnsupportedEncodingException;
 
 public class Main extends ActionBarActivity {
 
@@ -34,5 +41,32 @@ public class Main extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void searchButton(View v){
+        EditText textSearch = (EditText) findViewById(R.id.searchText);
+        TextView text = (TextView) findViewById(R.id.textView);
 
+        text.setText(textSearch.getText());
+        String textString = textSearch.getText().toString();
+        sendRequest(textString);
+    }
+
+    public void sendRequest(final String searchKey){
+        runOnUiThread(new Runnable() {
+            public void run() {
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.get("http://www.metacritic.com/search/all/" + searchKey + "/results", new
+
+                                JsonHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, org.json.JSONArray
+                                            responseBody) {
+                                        System.out.println(statusCode);
+                                        //System.out.println(responseBody.toString());
+
+                                    }
+                                }
+                );
+            }
+        });
+    }
 }
