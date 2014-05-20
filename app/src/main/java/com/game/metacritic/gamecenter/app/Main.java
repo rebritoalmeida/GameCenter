@@ -9,12 +9,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import org.apache.http.Header;
 
 import java.io.UnsupportedEncodingException;
+
+import CommonObj.Game;
+import CommonObj.ResponseResult;
 
 public class Main extends ActionBarActivity {
 
@@ -56,16 +60,17 @@ public class Main extends ActionBarActivity {
     public void sendRequest(final String searchKey){
 
         Ion.with(getBaseContext())
-                .load("https://byroredux-metacritic.p.mashape.com/find/game")
+                .load("https://byroredux-metacritic.p.mashape.com/search/game")
                 .setHeader("X-Mashape-Authorization", "k9NRNiglcY9Tepn1mjBQgf67JuBpBxyh")
-                .setBodyParameter("title", "The Elder Scrolls V: Skyrim")
+                .setBodyParameter("title", "Elder")
                 .setBodyParameter("platform", "1")
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+                .as(new TypeToken<ResponseResult>() {})
+                .setCallback(new FutureCallback<ResponseResult>() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void onCompleted(Exception e, ResponseResult result) {
                         TextView text = (TextView) findViewById(R.id.textView);
-                        text.setText(result.toString());
+                        for(Game ee : result.results)
+                         text.setText(ee.name);
                     }
                 });
 
