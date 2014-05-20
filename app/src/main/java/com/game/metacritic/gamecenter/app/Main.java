@@ -1,13 +1,16 @@
 package com.game.metacritic.gamecenter.app;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.loopj.android.http.*;
+
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import org.apache.http.Header;
 
@@ -51,22 +54,20 @@ public class Main extends ActionBarActivity {
     }
 
     public void sendRequest(final String searchKey){
-        runOnUiThread(new Runnable() {
-            public void run() {
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.get("http://www.metacritic.com/search/all/" + searchKey + "/results", new
 
-                                JsonHttpResponseHandler() {
-                                    @Override
-                                    public void onSuccess(int statusCode, Header[] headers, org.json.JSONArray
-                                            responseBody) {
-                                        System.out.println(statusCode);
-                                        //System.out.println(responseBody.toString());
+        Ion.with(getBaseContext())
+                .load("https://byroredux-metacritic.p.mashape.com/find/game")
+                .setHeader("X-Mashape-Authorization", "k9NRNiglcY9Tepn1mjBQgf67JuBpBxyh")
+                .setBodyParameter("title", "The Elder Scrolls V: Skyrim")
+                .setBodyParameter("platform", "1")
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        TextView text = (TextView) findViewById(R.id.textView);
+                        text.setText(result.toString());
+                    }
+                });
 
-                                    }
-                                }
-                );
-            }
-        });
     }
 }
