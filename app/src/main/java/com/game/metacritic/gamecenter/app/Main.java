@@ -8,20 +8,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-
-import org.apache.http.Header;
-
-import java.io.UnsupportedEncodingException;
 
 import CommonObj.Game;
 import CommonObj.ResponseResult;
 
 public class Main extends ActionBarActivity {
-
+    public ResponseResult results;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,18 +53,22 @@ public class Main extends ActionBarActivity {
     }
 
     public void sendRequest(final String searchKey){
+        EditText textSearch = (EditText) findViewById(R.id.searchText);
 
         Ion.with(getBaseContext())
                 .load("https://byroredux-metacritic.p.mashape.com/search/game")
                 .setHeader("X-Mashape-Authorization", "k9NRNiglcY9Tepn1mjBQgf67JuBpBxyh")
-                .setBodyParameter("title", "Elder")
+                .setBodyParameter("title",textSearch.getText().toString())
                 .setBodyParameter("platform", "1")
                 .as(new TypeToken<ResponseResult>() {})
                 .setCallback(new FutureCallback<ResponseResult>() {
                     @Override
                     public void onCompleted(Exception e, ResponseResult result) {
+                        if(result != null){
+                            results = result;
+                        }
                         TextView text = (TextView) findViewById(R.id.textView);
-                        for(Game ee : result.results)
+                        for(Game ee : results.results)
                          text.setText(ee.name);
                     }
                 });
