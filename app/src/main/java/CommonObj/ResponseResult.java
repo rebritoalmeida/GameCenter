@@ -1,5 +1,6 @@
 package CommonObj;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,5 +8,5 @@ import java.util.List;
  */
 public class ResponseResult {
     public String count;
-    public List<Game> results;
+    public ArrayList<Game> results;
 }

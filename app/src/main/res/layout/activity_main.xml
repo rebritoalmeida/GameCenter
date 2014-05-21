@@ -35,17 +35,63 @@
 </LinearLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
         android:layout_marginTop="100dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="53dp"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/textView"
-            android:layout_weight="0.12" />
+            android:id="@+id/textView" />
     </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/tableGames"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableRow android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tableName"
+                android:text="Name"
+                android:layout_height="wrap_content"
+                android:layout_width="100dp" />
+            <TextView
+                android:id="@+id/tableRate"
+                android:text="Rate"
+                android:layout_height="wrap_content"
+                android:layout_width="100dp" />
+            <TextView
+                android:id="@+id/tablePlatform"
+                android:text="Platform"
+                android:layout_height="wrap_content"
+                android:layout_width="100dp" />
+        </TableRow>
+
+        <TableRow android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/visitorRuns"
+                android:text="0"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/visitorHits"
+                android:text="0"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/visitorErrors"
+                android:text="0"
+                android:layout_height="wrap_content"
+                />
+        </TableRow>
+
+    </TableLayout>
 </RelativeLayout>
