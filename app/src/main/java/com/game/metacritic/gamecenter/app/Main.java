@@ -38,6 +38,8 @@ public class Main extends ActionBarActivity {
         
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        resetFragment();
         return true;
     }
 
@@ -53,6 +55,7 @@ public class Main extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     public void searchButton(View v){
+        resetFragment();
         EditText textSearch = (EditText) findViewById(R.id.searchText);
         TextView text = (TextView) findViewById(R.id.textView);
 
@@ -110,5 +113,13 @@ public class Main extends ActionBarActivity {
             // add the row to the table layout
             tbl.addView(newRow);
         }
+    }
+
+    public void resetFragment() {
+        Fragment gameList = new GameList();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_placeholder, gameList);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
