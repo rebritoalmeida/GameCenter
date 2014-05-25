@@ -9,30 +9,31 @@
     tools:context="com.game.metacritic.gamecenter.app.Main">
 <LinearLayout
     android:layout_width="1000dp"
-    android:layout_height="100dp">
-
-    <Button
-        android:onClick="searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/searchButton"
-        android:layout_marginTop="46dp"
-        android:layout_marginRight="59dp" />
+    android:layout_height="100dp"
+    android:id="@+id/linearLayout2">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/searchText"
         android:layout_toLeftOf="@+id/searchButton" />
+    <Button
+        android:onClick="searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/searchButton"
+ />
+
+
 </LinearLayout>
 
     <LinearLayout
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
         android:weightSum="1"
-        android:id="@+id/linearLayout">
+        android:id="@+id/fragment_placeholder">
 
 
         <TextView
@@ -40,53 +41,54 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/textView" />
+
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbars="none"
-        android:layout_weight="1"
-        android:fillViewport="false"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-    <TableLayout
-        android:id="@+id/tableGames"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:orientation="horizontal"
+        android:layout_width="1000dp"
+        android:layout_height="300dp"
+        android:layout_alignRight="@+id/linearLayout2"
+        android:layout_alignEnd="@+id/linearLayout2"
+        android:layout_marginTop="100dp">
 
-        <TableRow android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tableName"
-                android:text="Name"
-                android:layout_height="wrap_content"
-                android:layout_width="100dp" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:layout_weight="1"
+            android:fillViewport="false"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+        <TableLayout
+            android:id="@+id/tableGames"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-        </TableRow>
+            <TableRow android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tableName"
+                    android:text="Name"
+                    android:layout_height="wrap_content"
+                    android:layout_width="100dp" />
 
-        <TableRow android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/visitorRuns"
-                android:text="0"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                android:id="@+id/visitorHits"
-                android:text="0"
-                android:layout_height="wrap_content"
-                />
-        </TableRow>
+            </TableRow>
 
-    </TableLayout>
+            <TableRow android:layout_height="wrap_content">
+
+            </TableRow>
+
+        </TableLayout>
+        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>

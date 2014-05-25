@@ -1,6 +1,9 @@
 package com.game.metacritic.gamecenter.app;
 
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -82,13 +85,27 @@ public class Main extends ActionBarActivity {
 
     public void createTable(List<Game> gameList){
         // reference the table layout
-        TableLayout tbl = (TableLayout)findViewById(R.id.tableGames);
-        for(Game game : gameList) {
+        final TableLayout tbl = (TableLayout)findViewById(R.id.tableGames);
+        for(final Game game : gameList) {
             // delcare a new row
-            TableRow newRow = new TableRow(this);
-            TextView rowText = new TextView(getApplicationContext());
+            final TableRow newRow = new TableRow(this);
+            final TextView rowText = new TextView(getApplicationContext());
             rowText.setText(game.name);
             // add views to the row
+            newRow.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    TextView text = (TextView) findViewById(R.id.textView);
+                    text.setText(game.name);
+                    Fragment gameDetails = new GameDetails();
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_placeholder, gameDetails);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                }
+            });
             newRow.addView(rowText); // you would actually want to set properties on this before adding it
             // add the row to the table layout
             tbl.addView(newRow);
