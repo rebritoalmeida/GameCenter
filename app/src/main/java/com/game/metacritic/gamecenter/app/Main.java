@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +108,10 @@ public class Main extends ActionBarActivity {
                     transaction.replace(R.id.fragment_placeholder, gameDetails);
                     transaction.addToBackStack(null);
                     transaction.commit();
+
+                    //ImageView image = (ImageView) findViewById(R.id.game_image);
+                    //ImageLoader imageLoader = ImageLoader.getInstance();
+                    //imageLoader.displayImage("http://3.bp.blogspot.com/-Sq3tjSh0-OE/TiTGg2BR47I/AAAAAAAAeNo/gjII-KXTmh8/s200/01.jpg", image);
 
                 }
             });
