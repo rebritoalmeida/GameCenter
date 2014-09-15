@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\pre-dexed\debug\ion-1.2.4-6642aa23effd068eb955622a26a41cd3e7d716d2.jar"
+        jar="C:\Users\Rui\.gradle\caches\modules-2\files-2.1\com.koushikdutta.ion\ion\1.2.4\776baf5cac8eb4145dc0901254122cf956a784e3\ion-1.2.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="776baf5cac8eb4145dc0901254122cf956a784e3"/>
+    <item
+        dex="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\pre-dexed\debug\classes-bf3906d984ed53c06a46d041cf70015afb53fedd.jar"
+        jar="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\18.0.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="8f11f56e350eacabf2273f646d981356eea0ed77"/>
+    <item
+        dex="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\pre-dexed\debug\androidasync-1.2.4-4c2a080f648d3e7c3a1484bddf6a551c4e040815.jar"
+        jar="C:\Users\Rui\.gradle\caches\modules-2\files-2.1\com.koushikdutta.async\androidasync\1.2.4\8dc7111050ee5f13a54b1206d47fee856159b2aa\androidasync-1.2.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="8dc7111050ee5f13a54b1206d47fee856159b2aa"/>
+    <item
+        dex="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.4-1f17792dc6c5a79210ef87a230df351b13cf8147.jar"
+        jar="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\libs\android-async-http-1.4.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3bae85a076241828810bf8fbcc12e5891d5fc34c"/>
+    <item
+        dex="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-8af0f1f3aeb87814857bae6d4c96b29a5e7e520c.jar"
+        jar="C:\Users\Rui\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156"/>
+    <item
+        dex="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\pre-dexed\debug\gson-2.2.4-77b0a322bd0c74fe91ff71f33b1a2932c22fb171.jar"
+        jar="C:\Users\Rui\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568"/>
+    <item
+        dex="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.2-862430dc61a1328adf189b7968f61e6cf5384d9a.jar"
+        jar="C:\Users\Rui\AndroidStudioProjects\BitBucket\app\libs\universal-image-loader-1.9.2.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="9e025bc5b84968e7d6ac765e660a70b3e5a87432"/>
+
+</pre-dex-items>
