@@ -1,7 +1,6 @@
-package CommonObj;
+package com.game.metacritic.gamecenter.app.data.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Rui Almeida on 20-05-2014.

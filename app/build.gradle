@@ -1,14 +1,12 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
 
     defaultConfig {
-        minSdkVersion 8
+        minSdkVersion 15
         targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {
@@ -16,12 +14,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:18.0+'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile files('libs/android-async-http-1.4.4.jar')
-    compile 'com.koushikdutta.ion:ion:1.2.4'
-    compile files('libs/universal-image-loader-1.9.2.jar')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // Google Play Services
+    compile 'com.google.android.gms:play-services:5.2.08'
+    compile 'com.android.support:gridlayout-v7:19.1.0'
+    compile 'com.android.support:mediarouter-v7:19.1.0'
+    compile 'com.android.support:support-v13:19.1.0'
+    compile files('C:/Users/Rui/AndroidStudioProjects/BitBucket/libs/androidasync-1.3.8.jar')
+    compile files('C:/Users/Rui/AndroidStudioProjects/BitBucket/libs/ion-1.3.8.jar')
+    compile files('C:/Users/Rui/AndroidStudioProjects/BitBucket/libs/gson-1.1.jar')
 }

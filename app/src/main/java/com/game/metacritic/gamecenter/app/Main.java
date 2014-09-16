@@ -2,14 +2,12 @@ package com.game.metacritic.gamecenter.app;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -17,13 +15,11 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import CommonObj.Game;
-import CommonObj.ResponseResult;
+import com.game.metacritic.gamecenter.app.data.models.Game;
+import com.game.metacritic.gamecenter.app.data.models.ResponseResult;
 
 public class Main extends ActionBarActivity {
     public ResponseResult results;

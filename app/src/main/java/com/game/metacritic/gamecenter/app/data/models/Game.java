@@ -1,4 +1,4 @@
-package CommonObj;
+package com.game.metacritic.gamecenter.app.data.models;
 
 /**
  * Created by Rui Almeida on 21-05-2014.
