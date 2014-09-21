@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+        <activity android:name=".fragments.HorizontalListViewDemo" />
+        <activity android:name=".fragments.EqualSpaceLayoutDemo" />
+        <activity android:name=".fragments.EqualSpaceLayoutDemo2" />
+        <activity android:name=".activities.FragmentShellActivity"/>
     </application>
 
 </manifest>
