@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.game.metacritic.gamecenter.app.R;
+import com.game.metacritic.gamecenter.app.activities.ShelfViewActivity;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
 import com.game.metacritic.gamecenter.app.networking.SearchGameService;
+import com.game.metacritic.gamecenter.app.utils.Utils;
 import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
 
 /**
@@ -52,6 +54,8 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 EditText searchGameText = (EditText) view.findViewById(R.id.search_game_text);
                 searchGameService(searchGameText.getText().toString());
+
+                Utils.navigateTo(getActivity(), ShelfViewActivity.class);
             }
         });
         return view;

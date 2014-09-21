@@ -14,4 +14,12 @@ public class GameResponse {
     public int count;
     @SerializedName("results")
     public ArrayList<Game> results;
+
+
+    public GameResponse(int maxPages, int count, ArrayList<Game> results) {
+        this.maxPages = maxPages;
+        this.count = count;
+        this.results = results;
+    }
+
 }

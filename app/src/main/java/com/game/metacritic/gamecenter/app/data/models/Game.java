@@ -19,4 +19,9 @@ public class Game {
     public String publisher;
     @SerializedName("platform")
     public String platform;
+
+    public Game(String score, String name) {
+        this.score = score;
+        this.name = name;
+    }
 }

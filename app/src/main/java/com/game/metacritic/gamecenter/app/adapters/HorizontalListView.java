@@ -25,7 +25,7 @@
  *
  */
 
-package com.game.metacritic.gamecenter.app.data.models;
+package com.game.metacritic.gamecenter.app.adapters;
 
 import java.util.LinkedList;
 import java.util.Queue;
