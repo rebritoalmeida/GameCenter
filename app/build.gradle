@@ -25,7 +25,9 @@ dependencies {
     compile 'com.android.support:gridlayout-v7:19.1.0'
     compile 'com.android.support:mediarouter-v7:19.1.0'
     compile 'com.android.support:support-v13:19.1.0'
+    compile 'com.cesarferreira.quickutils:library:1.1.2'
+    compile files('libs/gson-2.2.4.jar')
     compile files('C:/Users/Rui/AndroidStudioProjects/BitBucket/libs/androidasync-1.3.8.jar')
     compile files('C:/Users/Rui/AndroidStudioProjects/BitBucket/libs/ion-1.3.8.jar')
-    compile files('C:/Users/Rui/AndroidStudioProjects/BitBucket/libs/gson-1.1.jar')
+    compile files('C:/Users/Rui/AndroidStudioProjects/BitBucket/libs/gson-2.3.jar')
 }

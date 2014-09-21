@@ -7,8 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.game.metacritic.gamecenter.app.R;
+import com.game.metacritic.gamecenter.app.data.models.GameResponse;
+import com.game.metacritic.gamecenter.app.networking.SearchGameService;
+import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +26,9 @@ import com.game.metacritic.gamecenter.app.R;
 public class SearchFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private View view;
+    private Button searchGameButton;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -34,7 +42,19 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        view = inflater.inflate(R.layout.fragment_search, container, false);
+
+
+        //Define Add FlowGridItem Background
+        searchGameButton = (Button) view.findViewById(R.id.search_game_button);
+        searchGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText searchGameText = (EditText) view.findViewById(R.id.search_game_text);
+                searchGameService(searchGameText.getText().toString());
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -74,6 +94,23 @@ public class SearchFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+
+    public void searchGameService(String gameSearch){
+        new SearchGameService(getActivity(),gameSearch, new TaskCallback<GameResponse>() {
+            @Override
+            public void onSuccess(GameResponse gameResponse) {
+
+                //todo: work on results
+                GameResponse game = gameResponse;
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+            }
+        }).execute();
     }
 
 }
