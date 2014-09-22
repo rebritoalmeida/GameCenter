@@ -17,7 +17,7 @@ public class Constants {
 
 
     //KEYS
-    public static final String UNSELECTED_FLOWS_KEY = "unselected_flows_key";
+    public static final String GAME_RESPONSE_KEY = "game_response_key";
 
 
     //Variables

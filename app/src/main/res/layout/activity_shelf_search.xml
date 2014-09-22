@@ -1,11 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:id="@+id/lineLayout">
-
-    <ListView
-        android:id="@+id/android:list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-</LinearLayout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shelf_search_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity"
+    tools:ignore="MergeRootFrame" />

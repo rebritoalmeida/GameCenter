@@ -1,62 +1,89 @@
 package com.game.metacritic.gamecenter.app.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.game.metacritic.gamecenter.app.R;
-import com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity;
+import com.game.metacritic.gamecenter.app.adapters.VerticalAdapter;
+import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
-import com.game.metacritic.gamecenter.app.networking.SearchGameService;
-import com.game.metacritic.gamecenter.app.utils.Constants;
-import com.game.metacritic.gamecenter.app.utils.Utils;
-import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
+import com.game.metacritic.gamecenter.app.data.models.Library;
+
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SearchFragment.OnFragmentInteractionListener} interface
+ * {@link ShelfSearchFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * create an instance of this fragment.
  *
  */
-public class SearchFragment extends Fragment {
+public class ShelfSearchFragment extends Fragment {
+
 
     private OnFragmentInteractionListener mListener;
     private View view;
-    private Button searchGameButton;
+    private ArrayAdapter<ArrayList<Game>> verticalAdapter;
+    private ListView gameListView;
+    private GameResponse mGameResponse;
 
-    public SearchFragment() {
+    public ShelfSearchFragment() {
         // Required empty public constructor
+    }
+
+    public static ShelfSearchFragment newInstance(GameResponse gameResponse) {
+        ShelfSearchFragment fragment = new ShelfSearchFragment();
+        fragment.mGameResponse = gameResponse;
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_search, container, false);
+        view = inflater.inflate(R.layout.fragment_shelf_search, container, false);
+        gameListView = (ListView) view.findViewById(R.id.game_request_listview);
 
+        /*
+		 * Calling Library & BookItem classes for create list of groups
+		 *  groupbyArrayBookItem return back array of array of items
+		 */
+        Library lb = new Library();
+        for (Game item : mGameResponse.results) {
+            lb.addGameItem(item);
+        }
 
-        //Define Add FlowGridItem Background
-        searchGameButton = (Button) view.findViewById(R.id.search_game_button);
-        searchGameButton.setOnClickListener(new View.OnClickListener() {
+        ArrayList<ArrayList<Game>> groupList;
+        groupList = lb.groupbyArrayBookItem(Library.AUTHOR);
+
+        verticalAdapter  = new VerticalAdapter(view.getContext(), R.layout.shelf_row, groupList);
+        gameListView.setAdapter(verticalAdapter);
+        gameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                EditText searchGameText = (EditText) view.findViewById(R.id.search_game_text);
-                searchGameService(searchGameText.getText().toString());
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //Utils.navigateTo(getActivity(), NewsDetailsActivity.class, Constants.NEWS_ITEM_KEY, listNews.get(position));
             }
         });
+        verticalAdapter.notifyDataSetChanged();
+
+        // Inflate the layout for this fragment
         return view;
     }
 
@@ -84,6 +111,9 @@ public class SearchFragment extends Fragment {
         mListener = null;
     }
 
+
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -100,21 +130,6 @@ public class SearchFragment extends Fragment {
     }
 
 
-    public void searchGameService(String gameSearch){
-        new SearchGameService(getActivity(),gameSearch, new TaskCallback<GameResponse>() {
-            @Override
-            public void onSuccess(GameResponse gameResponse) {
-
-                //todo: work on results
-                GameResponse game = gameResponse;
-                Utils.navigateTo(getActivity(), ShelfSearchActivity.class, Constants.GAME_RESPONSE_KEY, gameResponse);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                e.printStackTrace();
-            }
-        }).execute();
+    public interface OnFragmentInteractionListenerl {
     }
-
 }

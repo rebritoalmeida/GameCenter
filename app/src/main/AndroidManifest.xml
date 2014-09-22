@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ShelfViewActivity"/>
+        <activity android:name=".activities.ShelfSearchActivity" />
+        <activity
+            android:name=".ShelfSearchActivity"
+            android:label="@string/title_activity_shelf_search" >
+        </activity>
     </application>
 
 </manifest>
