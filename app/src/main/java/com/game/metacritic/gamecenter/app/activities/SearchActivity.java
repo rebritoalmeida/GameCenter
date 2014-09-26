@@ -14,7 +14,7 @@ public class SearchActivity extends Activity implements SearchFragment.OnFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+ 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.search_activity, new SearchFragment())
