@@ -11,10 +11,12 @@
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
         android:fitsSystemWindows="true"
+        android:background="@drawable/gaming_background"
+        android:alpha="128"
         android:scaleType="fitXY"/>
 
     <LinearLayout
-        android:id="@+id/login_background"
+        android:id="@+id/search_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -50,7 +52,7 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_corner_white"
-                android:hint="Mon email"
+                android:hint="Game to search"
                 android:layout_marginBottom="10dp"
                 android:paddingLeft="10dp"
                 android:text="Mario"/>
@@ -59,9 +61,9 @@
                 android:id="@+id/search_game_button"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                style="@style/ValiderButton"
+                style="@style/SearchButton"
                 android:textColor="@color/white"
-                android:text="Valider"
+                android:text="Search"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"/>
         </LinearLayout>

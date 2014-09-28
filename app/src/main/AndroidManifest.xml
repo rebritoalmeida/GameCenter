@@ -23,6 +23,10 @@
             android:name=".ShelfSearchActivity"
             android:label="@string/title_activity_shelf_search" >
         </activity>
+        <activity
+            android:name=".activities.GameDetailsActivity"
+            android:label="@string/title_activity_game_details" >
+        </activity>
     </application>
 
 </manifest>

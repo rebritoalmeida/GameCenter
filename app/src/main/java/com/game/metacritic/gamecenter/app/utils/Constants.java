@@ -10,6 +10,9 @@ public class Constants {
 
     // KEYS
     public static final String TITLE = "title";
+    public static final String PLATFORM = "platform";
+    public static final String RETRY = "retry";
+
 
 
     // COLORS
@@ -18,6 +21,7 @@ public class Constants {
 
     //KEYS
     public static final String GAME_RESPONSE_KEY = "game_response_key";
+    public static final String GAME_KEY = "game_key";
 
 
     //Variables

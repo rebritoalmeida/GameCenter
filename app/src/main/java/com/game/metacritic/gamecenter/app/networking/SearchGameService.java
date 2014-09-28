@@ -2,14 +2,9 @@ package com.game.metacritic.gamecenter.app.networking;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import com.google.gson.*;
-import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
-import com.game.metacritic.gamecenter.app.exceptions.NoInternetConnectionException;
 import com.game.metacritic.gamecenter.app.utils.Constants;
-import com.game.metacritic.gamecenter.app.utils.Utils;
 import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
