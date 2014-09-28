@@ -1,4 +1,5 @@
 package com.game.metacritic.gamecenter.app.data.models;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
