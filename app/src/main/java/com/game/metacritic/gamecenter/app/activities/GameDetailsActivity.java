@@ -1,6 +1,7 @@
 package com.game.metacritic.gamecenter.app.activities;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +11,7 @@ import com.game.metacritic.gamecenter.app.fragments.GameDetailsFragment;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.google.gson.Gson;
 
-public class GameDetailsActivity extends Activity {
+public class GameDetailsActivity extends Activity implements GameDetailsFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,5 +51,10 @@ public class GameDetailsActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

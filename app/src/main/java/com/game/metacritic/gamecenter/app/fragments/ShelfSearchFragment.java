@@ -12,10 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.game.metacritic.gamecenter.app.R;
+import com.game.metacritic.gamecenter.app.activities.GameDetailsActivity;
 import com.game.metacritic.gamecenter.app.adapters.VerticalAdapter;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
 import com.game.metacritic.gamecenter.app.data.models.Library;
+import com.game.metacritic.gamecenter.app.utils.Constants;
+import com.game.metacritic.gamecenter.app.utils.Utils;
 
 
 import java.util.ArrayList;
@@ -36,6 +39,7 @@ public class ShelfSearchFragment extends Fragment {
     private ArrayAdapter<ArrayList<Game>> verticalAdapter;
     private ListView gameListView;
     private GameResponse mGameResponse;
+    ArrayList<ArrayList<Game>> mGroupList;
 
     public ShelfSearchFragment() {
         // Required empty public constructor
@@ -70,17 +74,10 @@ public class ShelfSearchFragment extends Fragment {
             lb.addGameItem(item);
         }
 
-        ArrayList<ArrayList<Game>> groupList;
-        groupList = lb.groupbyArrayBookItem(Library.AUTHOR);
+        mGroupList = lb.groupbyArrayBookItem(Library.AUTHOR);
 
-        verticalAdapter  = new VerticalAdapter(view.getContext(), R.layout.shelf_row, groupList);
+        verticalAdapter  = new VerticalAdapter(view.getContext(), R.layout.shelf_row, mGroupList);
         gameListView.setAdapter(verticalAdapter);
-        gameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //Utils.navigateTo(getActivity(), NewsDetailsActivity.class, Constants.NEWS_ITEM_KEY, listNews.get(position));
-            }
-        });
         verticalAdapter.notifyDataSetChanged();
 
         // Inflate the layout for this fragment

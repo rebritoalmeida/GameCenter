@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import com.game.metacritic.gamecenter.app.data.models.FindGameRequest;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
+import com.game.metacritic.gamecenter.app.data.models.ResultGame;
+import com.game.metacritic.gamecenter.app.data.models.enums.PlatformType;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
 import com.google.gson.JsonObject;
@@ -14,6 +16,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.async.http.body.JSONObjectBody;
 import com.koushikdutta.ion.Ion;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import quickutils.core.QuickUtils;
@@ -26,55 +29,61 @@ public class FindGameService extends AsyncTask<Void, Void, Void> {
     public Exception mException;
 
     private Context mContext;
-    private Game mGame;
-    private TaskCallback<Game> mCallBack;
-    private FindGameRequest mfindGameRequest;
+    private ArrayList<Game> mGames;
+    private TaskCallback<ArrayList<Game>> mCallBack;
+    private GameResponse mGameList;
 
-    public FindGameService(Context context, FindGameRequest findGameRequest, TaskCallback callback) {
+    public FindGameService(Context context,GameResponse gameList, TaskCallback callback) {
         mContext = context;
         mCallBack = callback;
-        mfindGameRequest = findGameRequest;
+        mGameList = gameList;
+        mGames = new ArrayList<Game>();
     }
 
 
     @Override
     protected Void doInBackground(Void... params) {
-        QuickUtils.log.d("STARTING GAME REQUEST...");
-        // if (QuickUtils.web.hasInternetConnection(mContext)) {
-        JsonObject json = new JsonObject();
 
-        json.addProperty(Constants.TITLE, mfindGameRequest.title);
-        json.addProperty(Constants.PLATFORM, mfindGameRequest.platform);
-        json.addProperty(Constants.RETRY, mfindGameRequest.retry);
+        for(final Game game : mGameList.results) {
+            QuickUtils.log.v(game.platform);
+            int platformType = PlatformType.getPlatformTypeByName(game.platform);
+            FindGameRequest request = new FindGameRequest(game.name, platformType, 4);
+            QuickUtils.log.d("STARTING GAME REQUEST...");
+            // if (QuickUtils.web.hasInternetConnection(mContext)) {
+            JsonObject json = new JsonObject();
 
-        try {
-            Ion.with(mContext)
-                    .load("https://byroredux-metacritic.p.mashape.com/find/game")
-                    .setHeader("X-Mashape-Authorization", "k9NRNiglcY9Tepn1mjBQgf67JuBpBxyh")
-                    .setJsonObjectBody(json)
-                    .as(new TypeToken<Game>() {
-                    })
-                    .setCallback(new FutureCallback<Game>() {
-                        @Override
-                        public void onCompleted(Exception e, Game game) {
-                            if (e != null) {
-                                mException = e;
-                                return;
+            json.addProperty(Constants.TITLE, request.title);
+            json.addProperty(Constants.PLATFORM, request.platform);
+            json.addProperty(Constants.RETRY, request.retry);
+
+            try {
+                Ion.with(mContext)
+                        .load("https://byroredux-metacritic.p.mashape.com/find/game")
+                        .setHeader("X-Mashape-Authorization", "k9NRNiglcY9Tepn1mjBQgf67JuBpBxyh")
+                        .setJsonObjectBody(json)
+                        .as(new TypeToken<ResultGame>() {
+                        })
+                        .setCallback(new FutureCallback<ResultGame>() {
+                            @Override
+                            public void onCompleted(Exception e, ResultGame game) {
+                                if (e != null) {
+                                    mException = e;
+                                    return;
+                                }
+                                mGames.add(game.game);
                             }
-                            mGame = game;
-                        }
-                    }).get();
+                        }).get();
 
-        } catch (InterruptedException e) {
-            mException = e;
-        } catch (NullPointerException e) {
-            mException = e;
-        } catch (ExecutionException e) {
-            mException = e;
-        }catch (Exception e) {
-            mException = e;
+            } catch (InterruptedException e) {
+                mException = e;
+            } catch (NullPointerException e) {
+                mException = e;
+            } catch (ExecutionException e) {
+                mException = e;
+            } catch (Exception e) {
+                mException = e;
+            }
         }
-
         // } else {
         //    mException = new NoInternetConnectionException("No internet connection");
         //}
@@ -85,7 +94,7 @@ public class FindGameService extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         if (mCallBack != null) {
             if (mException == null) {
-                mCallBack.onSuccess(mGame);
+                mCallBack.onSuccess(mGames);
             } else {
                 mCallBack.onFailure(mException);
             }

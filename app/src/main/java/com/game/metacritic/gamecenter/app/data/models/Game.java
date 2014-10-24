@@ -1,5 +1,6 @@
 package com.game.metacritic.gamecenter.app.data.models;
 
+import com.game.metacritic.gamecenter.app.data.models.enums.PlatformType;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;

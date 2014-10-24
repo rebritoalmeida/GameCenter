@@ -2,6 +2,7 @@ package com.game.metacritic.gamecenter.app.data.models;
 
 import java.security.acl.Group;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Library {
 
@@ -53,7 +54,9 @@ public class Library {
 		 * groupbyArrayBookItem return back array of array of items
 		 */
 
+
         /*
+
         Game game = new Game("MATIO","3");
         ArrayList<Game> games = new ArrayList<Game>();
         games.add(game);
@@ -73,15 +76,6 @@ public class Library {
         gameResponses.add(gameResponse);
         gameResponses.add(gameResponse);
 */
-        /*
-        for(int i = 0; i < arrayGameItem.size(); i++) {
-            if(i%5 == 0) {
-                groupList.add(arrayGameItem.get(i));
-            }
-        }*/
-
-        groupList.add(arrayGameItem);
-
         /*groupList.add(gameResponses);
         groupList.add(gameResponses);
         groupList.add(gameResponses);
@@ -91,9 +85,15 @@ public class Library {
         groupList.add(gameResponses);
         groupList.add(gameResponses);
         groupList.add(gameResponses);*/
+        Game [] games = arrayGameItem.toArray(new Game[arrayGameItem.size()]);
 
-       //Iterable<Group> groups =
-         //       from("bookitem").in(books).group("bookitem")
+        for(int i = 0; i < games.length; i+=4){
+            Game [] sasd = Arrays.copyOfRange(games, i, i+4);
+            groupList.add(new ArrayList<Game>(Arrays.asList(sasd)));
+        }
+
+        //Iterable<Group> groups =
+        //       from("bookitem").in(books).group("bookitem")
           //              .by(getType).into("g").select("g");
         ArrayList<Group> groups = new ArrayList<Group>();
         for (Group group : groups) {
