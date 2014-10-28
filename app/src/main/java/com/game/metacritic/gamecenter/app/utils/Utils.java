@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 
 
+import com.game.metacritic.gamecenter.app.data.models.Game;
+import com.game.metacritic.gamecenter.app.data.models.GameDAO;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -17,6 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import quickutils.core.QuickUtils;
 
 /**
@@ -42,6 +47,53 @@ public class Utils {
         mContext = context;
     }
 
+    public static boolean intervallContains(double low, double high, double n) {
+        return n >= low && n <= high;
+    }
+
+    public static boolean insertInBD(Activity act, Game mGame){
+
+        Realm realm = Realm.getInstance(act);
+        realm.beginTransaction();
+        GameDAO game = realm.createObject(GameDAO.class);
+
+        game.setName(mGame.name);
+        game.setScore(mGame.score);
+        game.setPlatform(mGame.platform);
+
+        realm.commitTransaction();
+        return true;
+    }
+
+    public static RealmResults selectInBD(Activity act){
+        Realm realm = Realm.getInstance(act);
+        RealmResults<GameDAO> gam = realm.where(GameDAO.class).findAll();
+        return gam;
+    }
+
+    public static int existsInBD(Activity act,Game mGame){
+        Realm realm = Realm.getInstance(act);
+        RealmResults<GameDAO> query = realm.where(GameDAO.class)
+                            .equalTo("name", mGame.name)
+                            .equalTo("score", mGame.score)
+                            .equalTo("platform", mGame.platform)
+                            .findAll();
+        if(query == null){
+            return 0;
+        }
+        return query.size();
+    }
+
+    public static boolean deleteInBD(Activity act){
+        try {
+            QuickUtils.log.d("deleteInBD");
+            Realm.deleteRealmFile(act);
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public static boolean isValidEmailAddress(String email) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";

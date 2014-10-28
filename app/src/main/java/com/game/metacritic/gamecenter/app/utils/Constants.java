@@ -26,5 +26,8 @@ public class Constants {
 
     //Variables
     public static final String AUTHORIZATION_KEY = "Authorization";
+    public static final Double[] LOW = {0.0, 3.0};
+    public static final Double[] MEDIUM = {3.1, 7.0};
+    public static final Double[] HIGHT = {7.1, 10.0};
 
 }

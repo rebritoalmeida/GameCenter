@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gfi.companyhub.activities.LoginActivity$PlaceholderFragment"
-    android:background="@color/white">
+    android:background="@color/black">
 
     <ImageView
         android:id="@+id/login_background_image_view"

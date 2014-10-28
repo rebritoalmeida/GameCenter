@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Rui Almeida on 21-05-2014.
  */
