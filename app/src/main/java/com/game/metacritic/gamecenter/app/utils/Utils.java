@@ -60,6 +60,14 @@ public class Utils {
         game.setName(mGame.name);
         game.setScore(mGame.score);
         game.setPlatform(mGame.platform);
+        game.setDeveloper(mGame.platform);
+        game.setGenre(mGame.genre);
+        game.setPublisher(mGame.publisher);
+        game.setRating(mGame.rating);
+        game.setRlsdate(mGame.rlsdate);
+        game.setThumbnail(mGame.thumbnail);
+        game.setUserscore(mGame.userscore.toString());
+        game.setUrl(mGame.url);
 
         realm.commitTransaction();
         return true;
@@ -68,6 +76,7 @@ public class Utils {
     public static RealmResults selectInBD(Activity act){
         Realm realm = Realm.getInstance(act);
         RealmResults<GameDAO> gam = realm.where(GameDAO.class).findAll();
+        QuickUtils.log.d("selectInBd" + gam.size());
         return gam;
     }
 

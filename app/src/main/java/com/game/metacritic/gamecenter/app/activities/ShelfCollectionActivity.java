@@ -1,36 +1,34 @@
 package com.game.metacritic.gamecenter.app.activities;
 
 import android.app.Activity;
+import android.app.ListActivity;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import com.game.metacritic.gamecenter.app.R;
 
-public class ShelfCollectionActivity extends Activity {
+import com.game.metacritic.gamecenter.app.R;
+import com.game.metacritic.gamecenter.app.data.models.GameResponse;
+import com.game.metacritic.gamecenter.app.fragments.ShelfCollectionFragment;
+import com.game.metacritic.gamecenter.app.fragments.ShelfSearchFragment;
+import com.game.metacritic.gamecenter.app.utils.Constants;
+import com.google.gson.Gson;
+
+public class ShelfCollectionActivity extends Activity implements ShelfCollectionFragment.OnFragmentInteractionListener {
+    /** Called when the activity is first created. */
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelf_collection);
-    }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.shelf_collection, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.shelf_collection_activity, ShelfCollectionFragment.newInstance()).commit();
         }
-        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.activities.GameDetailsActivity;
 import com.game.metacritic.gamecenter.app.activities.SearchActivity;
+import com.game.metacritic.gamecenter.app.activities.ShelfCollectionActivity;
 import com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
@@ -47,6 +48,7 @@ class HorizontalAdapter extends ArrayAdapter<Game> {
 
 
         ImageView icon = (ImageView) retval.findViewById(R.id.icon);
+        //todo : remove on click
         icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

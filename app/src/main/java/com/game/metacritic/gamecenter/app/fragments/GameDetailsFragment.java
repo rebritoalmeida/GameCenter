@@ -75,7 +75,7 @@ public class GameDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        Utils.deleteInBD(getActivity());
+        //Utils.deleteInBD(getActivity());
 
         view = inflater.inflate(R.layout.fragment_game_details, container, false);
 
@@ -104,11 +104,11 @@ public class GameDetailsFragment extends Fragment {
 
         gameUserScore.setText(gameUserScore.getText().toString() + " " + mGame.userscore);
 
-        if(Utils.intervallContains(Constants.LOW[0], Constants.LOW[1], mGame.userscore)){
+        if(Utils.intervallContains(Constants.LOW[0], Constants.LOW[1], Double.parseDouble(mGame.userscore))){
             gameRate.setBackgroundColor(Color.RED);
-        } else if(Utils.intervallContains(Constants.MEDIUM[0], Constants.MEDIUM[1], mGame.userscore)){
+        } else if(Utils.intervallContains(Constants.MEDIUM[0], Constants.MEDIUM[1], Double.parseDouble(mGame.userscore))){
             gameRate.setBackgroundColor(Color.YELLOW);
-        } else if(Utils.intervallContains(Constants.HIGHT[0], Constants.HIGHT[1], mGame.userscore)){
+        } else if(Utils.intervallContains(Constants.HIGHT[0], Constants.HIGHT[1], Double.parseDouble(mGame.userscore))){
             gameRate.setBackgroundColor(Color.GREEN);
         }
 

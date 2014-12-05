@@ -66,6 +66,15 @@
                 android:text="Search"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"/>
+            <Button
+                android:id="@+id/my_collection_button"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                style="@style/SearchButton"
+                android:textColor="@color/white"
+                android:text="My Collection"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.game.metacritic.gamecenter.app.R;
+import com.game.metacritic.gamecenter.app.activities.ShelfCollectionActivity;
 import com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity;
 import com.game.metacritic.gamecenter.app.data.models.FindGameRequest;
 import com.game.metacritic.gamecenter.app.data.models.Game;
@@ -40,6 +41,8 @@ public class SearchFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private View view;
     private Button searchGameButton;
+    private Button myCollectionButton;
+
     private ArrayList<Game> gameList;
 
     public SearchFragment() {
@@ -65,6 +68,15 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 EditText searchGameText = (EditText) view.findViewById(R.id.search_game_text);
                 searchGameService(searchGameText.getText().toString());
+            }
+        });
+
+        myCollectionButton = (Button) view.findViewById(R.id.my_collection_button);
+        myCollectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.navigateTo(getActivity(), ShelfCollectionActivity.class);
+
             }
         });
         return view;

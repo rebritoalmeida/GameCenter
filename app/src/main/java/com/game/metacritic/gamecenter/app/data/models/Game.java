@@ -30,12 +30,26 @@ public class Game {
     @SerializedName("thumbnail")
     public String thumbnail;
     @SerializedName("userscore")
-    public Double userscore;
+    public String userscore;
     @SerializedName("developer")
     public String developer;
 
     public Game(String score, String name) {
         this.score = score;
         this.name = name;
+    }
+
+    public Game(String name, String score, String url, String rlsdate, String rating, String publisher, String platform, String genre, String thumbnail, String userscore, String developer) {
+        this.name = name;
+        this.score = score;
+        this.url = url;
+        this.rlsdate = rlsdate;
+        this.rating = rating;
+        this.publisher = publisher;
+        this.platform = platform;
+        this.genre = genre;
+        this.thumbnail = thumbnail;
+        this.userscore = userscore;
+        this.developer = developer;
     }
 }
