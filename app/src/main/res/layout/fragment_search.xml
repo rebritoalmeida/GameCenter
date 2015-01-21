@@ -55,7 +55,7 @@
                 android:hint="Game to search"
                 android:layout_marginBottom="10dp"
                 android:paddingLeft="10dp"
-                android:text="The Elder Scrolls V: Skyrim"/>
+                android:text="x-men"/>
 
             <Button
                 android:id="@+id/search_game_button"

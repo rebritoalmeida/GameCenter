@@ -13,15 +13,25 @@ import android.widget.ListView;
 
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.activities.GameDetailsActivity;
+import com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity;
+import com.game.metacritic.gamecenter.app.adapters.GameArrayAdapter;
 import com.game.metacritic.gamecenter.app.adapters.VerticalAdapter;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
 import com.game.metacritic.gamecenter.app.data.models.Library;
+import com.game.metacritic.gamecenter.app.networking.GetGameService;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
+import com.game.metacritic.gamecenter.app.utils.interfaces.InstallGameButtonClickListener;
+import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
 
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import quickutils.core.QuickUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,16 +48,18 @@ public class ShelfSearchFragment extends Fragment {
     private View view;
     private ArrayAdapter<ArrayList<Game>> verticalAdapter;
     private ListView gameListView;
-    private GameResponse mGameResponse;
+    private List<Game> mGameResponse;
     ArrayList<ArrayList<Game>> mGroupList;
+    private GameArrayAdapter gameAdapter;
+    private int pos;
 
     public ShelfSearchFragment() {
         // Required empty public constructor
     }
 
-    public static ShelfSearchFragment newInstance(GameResponse gameResponse) {
+    public static ShelfSearchFragment newInstance(Game[] gameResponse) {
         ShelfSearchFragment fragment = new ShelfSearchFragment();
-        fragment.mGameResponse = gameResponse;
+        fragment.mGameResponse = Arrays.asList(gameResponse);
         return fragment;
     }
 
@@ -64,21 +76,22 @@ public class ShelfSearchFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_shelf_search, container, false);
         gameListView = (ListView) view.findViewById(R.id.game_request_listview);
-
+        setGameArrayAdapter(mGameResponse);
         /*
 		 * Calling Library & BookItem classes for create list of groups
 		 *  groupbyArrayBookItem return back array of array of items
 		 */
-        Library lb = new Library();
-        for (Game item : mGameResponse.results) {
-            lb.addGameItem(item);
-        }
+//        Library lb = new Library();
+//        for (Game item : mGameResponse.results) {
+//            lb.addGameItem(item);
+//        }
 
-        mGroupList = lb.groupbyArrayBookItem(Library.AUTHOR);
 
-        verticalAdapter  = new VerticalAdapter(view.getContext(), R.layout.shelf_row, mGroupList);
-        gameListView.setAdapter(verticalAdapter);
-        verticalAdapter.notifyDataSetChanged();
+//        mGroupList = lb.groupbyArrayBookItem(Library.AUTHOR);
+
+//        verticalAdapter  = new VerticalAdapter(view.getContext(), R.layout.shelf_row, mGroupList);
+//        gameListView.setAdapter(verticalAdapter);
+//        verticalAdapter.notifyDataSetChanged();
 
         // Inflate the layout for this fragment
         return view;
@@ -126,7 +139,25 @@ public class ShelfSearchFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-
-    public interface OnFragmentInteractionListenerl {
+    public void setGameArrayAdapter(final List<Game> list) {
+        gameAdapter = new GameArrayAdapter(getActivity(), list, new InstallGameButtonClickListener() {
+            @Override
+            public void onBtnClick(int position, Boolean isDetail) {
+                pos = position;
+                if(list.get(position).id != "0"){
+                    new GetGameService(getActivity(),list.get(position), new TaskCallback<Game>() {
+                        @Override
+                        public void onSuccess(Game gameResponse) {
+                            Utils.navigateTo(getActivity(), GameDetailsActivity.class, Constants.GAME_KEY, gameResponse);
+                        }
+                        @Override
+                        public void onFailure(Exception e) {
+                            e.printStackTrace();
+                        }
+                    }).execute();
+                }
+            }
+        });
+        gameListView.setAdapter(gameAdapter);
     }
 }

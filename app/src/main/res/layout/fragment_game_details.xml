@@ -31,7 +31,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
-                android:layout_weight="20"
+                android:layout_weight="30.44"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -43,7 +43,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/game_thumbnail"
                         android:layout_gravity="top"/>
 
                 </LinearLayout>
@@ -139,7 +138,7 @@
                     android:id="@+id/rate_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Rate:"
+                    android:text="ESRB: "
                     android:textColor="@color/black"
                     android:gravity="left|center_vertical"
                     android:clickable="false"

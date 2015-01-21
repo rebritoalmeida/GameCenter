@@ -61,9 +61,9 @@ class HorizontalAdapter extends ArrayAdapter<Game> {
                 .findViewById(R.id.author);
 
         if(mGames.get(position) != null) {
-            QuickUtils.log.v(mGames.get(position).thumbnail);
+            QuickUtils.log.v(mGames.get(position).getThumbnail());
             Picasso.with(mContext)
-                    .load(mGames.get(position).thumbnail)
+                    .load(mGames.get(position).getThumbnail())
                     .into(icon);
 
 

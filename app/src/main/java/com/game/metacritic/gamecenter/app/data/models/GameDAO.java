@@ -12,6 +12,7 @@ import io.realm.annotations.RealmClass;
 @RealmClass
 public class GameDAO extends RealmObject {
 
+    private String id;
     private String name;
     private String score;
     private String url;
@@ -110,5 +111,13 @@ public class GameDAO extends RealmObject {
 
     public void setDeveloper(String developer) {
         this.developer = developer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -13,20 +13,13 @@ import android.widget.EditText;
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.activities.ShelfCollectionActivity;
 import com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity;
-import com.game.metacritic.gamecenter.app.data.models.FindGameRequest;
 import com.game.metacritic.gamecenter.app.data.models.Game;
-import com.game.metacritic.gamecenter.app.data.models.GameResponse;
-import com.game.metacritic.gamecenter.app.data.models.ResultGame;
-import com.game.metacritic.gamecenter.app.data.models.enums.PlatformType;
-import com.game.metacritic.gamecenter.app.networking.FindGameService;
-import com.game.metacritic.gamecenter.app.networking.SearchGameService;
+import com.game.metacritic.gamecenter.app.networking.GetGamesListService;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
 import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
 
 import java.util.ArrayList;
-
-import quickutils.core.QuickUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -123,31 +116,12 @@ public class SearchFragment extends Fragment {
 
 
     public void searchGameService(String gameSearch){
-        new SearchGameService(getActivity(),gameSearch, new TaskCallback<GameResponse>() {
+        new GetGamesListService(getActivity(),gameSearch, new TaskCallback<ArrayList<Game>>() {
             @Override
-            public void onSuccess(final GameResponse gameResp) {
+            public void onSuccess(ArrayList<Game> gameResponse) {
 
-                //todo: work on results
-
-
-                final GameResponse gameResponse = gameResp;
-
-
-                new FindGameService(getActivity(), gameResponse,new TaskCallback<ArrayList<Game>>() {
-                    @Override
-                    public void onSuccess(ArrayList<Game> gam) {
-                        //gameList.add(gam.game);
-                        gameList = gam;
-                        gameResponse.results = gameList;
-                        Utils.navigateTo(getActivity(), ShelfSearchActivity.class, Constants.GAME_RESPONSE_KEY, gameResponse);
-
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-
-                    }
-                }).execute();
+                if(gameResponse != null && gameResponse.size() > 0)
+                Utils.navigateTo(getActivity(), ShelfSearchActivity.class, Constants.GAME_RESPONSE_KEY, gameResponse);
              }
 
             @Override

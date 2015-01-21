@@ -6,10 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.game.metacritic.gamecenter.app.R;
+import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameResponse;
 import com.game.metacritic.gamecenter.app.fragments.ShelfSearchFragment;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShelfSearchActivity extends Activity implements ShelfSearchFragment.OnFragmentInteractionListener {
     /** Called when the activity is first created. */
@@ -24,11 +28,11 @@ public class ShelfSearchActivity extends Activity implements ShelfSearchFragment
         if (extras != null) {
             gameItemString = extras.getString(Constants.GAME_RESPONSE_KEY);
         }
-        GameResponse itemGameResponse = new Gson().fromJson(gameItemString, GameResponse.class);
+        Game[] itemGameArray = new Gson().fromJson(gameItemString, Game[].class);
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.shelf_search_activity, ShelfSearchFragment.newInstance(itemGameResponse)).commit();
+                    .add(R.id.shelf_search_activity, ShelfSearchFragment.newInstance(itemGameArray)).commit();
         }
 
     }

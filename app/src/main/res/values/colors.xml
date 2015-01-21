@@ -170,5 +170,5 @@
     <!--Store Buttons Colors-->
     <color name="InstallerButton">#EB561A</color>
     <color name="ObligatoireButton">#8D4952</color>
-    <color name="InstalleeButton">#90AB5F</color>
+    <color name="AddButton">#90AB5F</color>
 </resources>

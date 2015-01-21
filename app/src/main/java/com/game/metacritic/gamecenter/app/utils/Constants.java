@@ -5,7 +5,11 @@ package com.game.metacritic.gamecenter.app.utils;
  */
 public class Constants {
 
-    public static final String METACRITIC_URL = "https://byroredux-metacritic.p.mashape.com/search/game";
+    public static final String GAMESDB_ENDPOINT = "http://www.thegamesdb.net/api/";
+    public static final String GET_GAME_LIST_ENDPOINT = "GetGamesList.php?name={gameTitle}";
+    public static final String THUMBNAIL_ENDPOINT = "http://thegamesdb.net/banners/_favcache/_tile-view/boxart/original/front/{gameId}-1.jpg";
+    public static final String GET_GAME_ENDPOINT = "GetGame.php?id={gameId}";
+
 
 
     // KEYS

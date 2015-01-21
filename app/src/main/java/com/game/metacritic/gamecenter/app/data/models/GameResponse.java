@@ -8,18 +8,15 @@ import java.util.ArrayList;
  * Created by Rui Almeida on 20-05-2014.
  */
 public class GameResponse {
-    @SerializedName("max_pages")
-    public int maxPages;
-    @SerializedName("count")
-    public int count;
-    @SerializedName("results")
+    public ArrayList<Game> Game;
+    public ArrayList<Game> getGame() {
+        return Game;
+    }
+
     public ArrayList<Game> results;
 
-
-    public GameResponse(int maxPages, int count, ArrayList<Game> results) {
-        this.maxPages = maxPages;
-        this.count = count;
-        this.results = results;
+    public void setGame(ArrayList<Game> game) {
+        Game = game;
     }
 
 }

@@ -18,14 +18,9 @@ import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameDAO;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
+import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
-import garin.artemiy.sqlitesimple.library.SQLiteSimple;
-import garin.artemiy.sqlitesimple.library.util.SimpleDatabaseUtil;
-import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import quickutils.core.QuickUtils;
 
@@ -90,26 +85,27 @@ public class GameDetailsFragment extends Fragment {
         gameDeveloper = (TextView) view.findViewById(R.id.game_developer_text_view);
         gameUrl = (TextView) view.findViewById(R.id.game_url_text_view);
 
-        if (mGame.thumbnail != null) {
-            Picasso.with(getActivity())
-                    .load(mGame.thumbnail)
-                    .into(gameThumbnail);
+        if(mGame.getThumbnail() != null && !mGame.getThumbnail().isEmpty()) {
+            Ion.with(gameThumbnail)
+                    .load(mGame.getThumbnail());
         }
 
         gameTitle.setText(gameTitle.getText().toString() + " " + mGame.name);
         gamePlatform.setText(gamePlatform.getText().toString() + " " + mGame.platform);
-        gameReleaseDate.setText(gameReleaseDate.getText().toString() + " " + mGame.rlsdate);
-        gameGenre.setText(gameGenre.getText().toString() + " " + mGame.genre);
+        gameReleaseDate.setText(gameReleaseDate.getText().toString() + " " + mGame.releaseDate);
+        //gameGenre.setText(gameGenre.getText().toString() + " " + mGame.genres.get(0).genre);
         gameRate.setText(gameRate.getText().toString() + " " + mGame.rating);
 
         gameUserScore.setText(gameUserScore.getText().toString() + " " + mGame.userscore);
 
-        if(Utils.intervallContains(Constants.LOW[0], Constants.LOW[1], Double.parseDouble(mGame.userscore))){
-            gameRate.setBackgroundColor(Color.RED);
-        } else if(Utils.intervallContains(Constants.MEDIUM[0], Constants.MEDIUM[1], Double.parseDouble(mGame.userscore))){
-            gameRate.setBackgroundColor(Color.YELLOW);
-        } else if(Utils.intervallContains(Constants.HIGHT[0], Constants.HIGHT[1], Double.parseDouble(mGame.userscore))){
-            gameRate.setBackgroundColor(Color.GREEN);
+        if(mGame.userscore != null) {
+            if (Utils.intervallContains(Constants.LOW[0], Constants.LOW[1], Double.parseDouble(mGame.userscore))) {
+                gameUserScore.setBackgroundColor(Color.RED);
+            } else if (Utils.intervallContains(Constants.MEDIUM[0], Constants.MEDIUM[1], Double.parseDouble(mGame.userscore))) {
+                gameUserScore.setBackgroundColor(Color.YELLOW);
+            } else if (Utils.intervallContains(Constants.HIGHT[0], Constants.HIGHT[1], Double.parseDouble(mGame.userscore))) {
+                gameUserScore.setBackgroundColor(Color.GREEN);
+            }
         }
 
         gameDeveloper.setText(gameDeveloper.getText().toString() + " " + mGame.developer);
