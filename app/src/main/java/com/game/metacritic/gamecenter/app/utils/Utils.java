@@ -1,19 +1,21 @@
 package com.game.metacritic.gamecenter.app.utils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Matrix;
+import android.widget.Toast;
 
 
+import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameDAO;
 import com.google.gson.Gson;
+import com.metrekare.android.widget.ContentLoadingProgressDialog;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import io.realm.Realm;
@@ -37,6 +39,8 @@ public class Utils {
     private static Context mContext;
     private static boolean mText;
     private static Map<Character, Character> MAP_NORM;
+    private static ArrayList<Integer> mSelectedItems;
+    private static ContentLoadingProgressDialog dialog;
 
     public static synchronized void init(Context context) {
         QuickUtils.log.d("############## INITING UTILS ############ ");
@@ -47,8 +51,18 @@ public class Utils {
         return n >= low && n <= high;
     }
 
-    public static boolean insertInBD(Activity act, Game mGame){
+    public static ContentLoadingProgressDialog dialogWithMessage(Context context, String message) {
+        return new ContentLoadingProgressDialog(context)
+                .message(message)
+                .indeterminate(true)
+                .cancelable(false)
+                .minDelay(0)
+                .minShowTime(10);
+    }
 
+    public static boolean insertInBD(Activity act, Game mGame){
+        dialog = Utils.dialogWithMessage(act, "Loading");
+        dialog.show();
         Realm realm = Realm.getInstance(act);
         realm.beginTransaction();
         GameDAO game = realm.createObject(GameDAO.class);
@@ -57,10 +71,12 @@ public class Utils {
         game.setPlatform(mGame.platform);
         game.setId(mGame.id);
         game.setThumbnail(mGame.getThumbnail());
-        game.setUserscore(mGame.userscore.toString());
-        game.setUrl(mGame.url);
+        game.setBox(mGame.isBox);
+        game.setCartridge(mGame.isCartridge);
+        game.setManual(mGame.isManual);
 
         realm.commitTransaction();
+        dialog.cancel();
         return true;
     }
 
@@ -74,12 +90,30 @@ public class Utils {
     public static int existsInBD(Activity act,Game mGame){
         Realm realm = Realm.getInstance(act);
         RealmResults<GameDAO> query = realm.where(GameDAO.class)
+                            .equalTo("id", mGame.id)
                             .equalTo("name", mGame.name)
-                            .equalTo("platform", mGame.platform)
                             .findAll();
         if(query == null){
             return 0;
         }
+        return query.size();
+    }
+
+    public static int updateInBD(Activity act,Game mGame){
+        Realm realm = Realm.getInstance(act);
+        realm.beginTransaction();
+
+        RealmResults<GameDAO> query = realm.where(GameDAO.class)
+                .equalTo("id", mGame.id)
+                .equalTo("name", mGame.name)
+                .findAll();
+        for (GameDAO object : query) {
+            object.setManual(mGame.isManual);
+            object.setBox(mGame.isBox);
+            object.setCartridge(mGame.isCartridge);
+        }
+
+        realm.commitTransaction();
         return query.size();
     }
 
@@ -107,6 +141,65 @@ public class Utils {
         activity.overridePendingTransition(0, 0);
         mainIntent.putExtra(key, new Gson().toJson(object) );
         activity.startActivity(mainIntent);
+    }
+
+    public static Dialog onCreateDialog(final Activity activity, final Game game) {
+        mSelectedItems = new ArrayList();  // Where we track the selected items
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        // Set the dialog title
+        //builder.setTitle("Pick")
+                // Specify the list array, the items to be selected by default (null for none),
+                // and the listener through which to receive callbacks when items are selected
+                builder.setMultiChoiceItems(R.array.multi_array, null,
+                        new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which,
+                                                boolean isChecked) {
+                                if (isChecked) {
+                                    // If the user checked the item, add it to the selected items
+                                    mSelectedItems.add(which);
+                                } else if (mSelectedItems.contains(which)) {
+                                    // Else, if the item is already in the array, remove it
+                                    mSelectedItems.remove(Integer.valueOf(which));
+                                }
+                            }
+                        })
+                        // Set the action buttons
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK, so save the mSelectedItems results somewhere
+                        // or return them to the component that opened the dialog
+                        for (int value : mSelectedItems) {
+                            QuickUtils.log.d("value ->" + value);
+                            switch (value) {
+                                case 0:
+                                    game.isBox = true;
+                                    break;
+                                case 1:
+                                    game.isCartridge = true;
+                                    break;
+                                case 2:
+                                    game.isManual = true;
+                                    break;
+                            }
+
+                        }
+
+                        Utils.insertInBD(activity, game);
+                        Toast toast = Toast.makeText(activity, "Game added with success", Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        return builder.create();
     }
 }
 

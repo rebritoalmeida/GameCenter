@@ -2,11 +2,151 @@
 <items version="2" >
 
     <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="c654eae911e6b937a56f14ba353baa95a82adb9c">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-21fdf3e2dfb3a0386d376a5c8ff17bcba4c97d2e.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/support-v13/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="27bbd3982cdfe4468a9bf99c8c773734a9049e33">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-0b5820b1964f9ce449767082277b76c9de124e92.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.11/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="0f700f6802ba1a1f1fa7ac26d5db0666a89d75a6">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-d6b967ac9aaba360f46d1108f82995e2316ac8d8.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/ion-1.3.8.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1fc0413880bde2e3ffab3c5e5a243f39dd409b1c">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/ion-1.3.8-dbc29fa73987175563d727b372ab62e6b578d8b0.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-69b5db563e865ddecec46e5aaceb46821eabd960.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/android-async-http-1.4.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3bae85a076241828810bf8fbcc12e5891d5fc34c">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.4-4cc287157f3adf47e8129c80119ec9605fc80562.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/realm-0.71.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="0757479e5a7aeeb8419cdcad06293c5a2f773c7d">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/realm-0.71.0-c4ea4db6ac9023fa73ea281ce87a8abf5e5ee299.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/universal-image-loader-1.9.2.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="9e025bc5b84968e7d6ac765e660a70b3e5a87432">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.2-6ed011390485ca6c805a185b4367290fed224226.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/19.1.0/libs/internal_impl-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e898b3d4e2733017f23894a563ea4f5b3aca72bc">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/internal_impl-19.1.0-09f0f541979ee4c17d48c0c57d3a9feec7579ff6.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/support-v13/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e128103d5281ddd26195a7f980b36d0d005a4e56">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-40e03d85f59b2a5b8aa9b009bd3b0eb9a20abf90.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-cfdfdc22c485fbb0a7b15aebfd2b9ebb3f7f420f.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="af4cc326e6cd92f88db12298767e521743aedd36">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-4595b00191836ad4f0a453db54bc075846e7c5f8.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.cesarferreira.quickutils/library/1.1.2/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="c353086542a6d7886ddd97c147de46fb40ac7dcd">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-c54aff17c071135f5ad9d89319853fad914ff4e1.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.metrekare/contentloadingprogressdialog/0.1/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="08754c91be53ba2c523cf0f8cfbbefaf5582461d">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-8710528b2c8a385449f84b5ed87dffa87129b914.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/sqlite-simple-2.7.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d476ab665d0ad314356fc3b19c829b71319ed89d">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/sqlite-simple-2.7-c36380587b9ecd3d71c51d87a325009470c2920b.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/picasso-2.3.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3b646ddbdac8a33fc45b64564011da81d23e4635">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/picasso-2.3.4-bc5055656b752b7e2e2476239dcccb0edfbcea1e.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/androidasync-1.3.8.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1f8e4f77d5f24179688c32b24dd5f79e889e7110">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/androidasync-1.3.8-7e347c761f6d96138a9fdb566b924c22f93c1181.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/libs/gson-2.3.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/gson-2.3-4ad538afcb6b9eabd41ab56900f61c3ea02c40c7.jar" />
+    </item>
+    <item
         jar="/Users/ruialmeida/gamecenter/app/libs/java-json.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="edad9c5de6fb8df07c535a47045956026011ffa3">
         <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/java-json-3e61c2f4808a8bdd02416393f36a53e785f2165e.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/Documents/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-68dfce7a7c67b6b29b1f7a979b740bd765343cbb.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-988517f13b59e9f2dda4734e1ed0a0d2fc63080b.jar" />
     </item>
 
 </items>

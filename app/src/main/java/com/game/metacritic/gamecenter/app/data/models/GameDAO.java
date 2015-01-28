@@ -1,8 +1,5 @@
 package com.game.metacritic.gamecenter.app.data.models;
 
-import com.google.gson.annotations.SerializedName;
-
-import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.RealmClass;
 
@@ -24,6 +21,33 @@ public class GameDAO extends RealmObject {
     private String thumbnail;
     private String userscore;
     private String developer;
+    private boolean box;
+    private boolean cartridge;
+    private boolean manual;
+
+    public boolean isBox() {
+        return box;
+    }
+
+    public void setBox(boolean box) {
+        this.box = box;
+    }
+
+    public boolean isCartridge() {
+        return cartridge;
+    }
+
+    public void setCartridge(boolean cartridge) {
+        this.cartridge = cartridge;
+    }
+
+    public boolean isManual() {
+        return manual;
+    }
+
+    public void setManual(boolean wManual) {
+        this.manual = wManual;
+    }
 
     public String getPlatform() {
         return platform;

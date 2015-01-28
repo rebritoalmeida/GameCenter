@@ -9,5 +9,10 @@
     <string name="title_activity_shelf_search">ShelfSearchActivity</string>
     <string name="title_activity_game_details">GameDetailsActivity</string>
     <string name="title_activity_shelf_collection">ShelfCollectionActivity</string>
-
+    <string-array
+        name="multi_array">
+        <item>Box</item>
+        <item>Cartridge</item>
+        <item>Manual</item>
+    </string-array>
 </resources>

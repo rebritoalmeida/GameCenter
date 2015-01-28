@@ -1,9 +1,13 @@
 package com.game.metacritic.gamecenter.app.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +16,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameDAO;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
+import com.koushikdutta.async.Util;
 import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import io.realm.RealmResults;
 import quickutils.core.QuickUtils;
@@ -39,13 +47,11 @@ public class GameDetailsFragment extends Fragment {
     private TextView gameTitle;
     private TextView gamePlatform;
     private TextView gameReleaseDate;
-    private TextView gameGenre;
     private TextView gameRate;
     private TextView gameUserScore;
     private TextView gameDeveloper;
     private TextView gameUrl;
     private Button addGame;
-    private Button selectGame;
     private ImageView gameThumbnail;
 
     public static GameDetailsFragment newInstance(Game game) {
@@ -79,7 +85,6 @@ public class GameDetailsFragment extends Fragment {
         gameTitle = (TextView) view.findViewById(R.id.game_title_text_view);
         gamePlatform = (TextView) view.findViewById(R.id.game_platform_text_view);
         gameReleaseDate = (TextView) view.findViewById(R.id.release_date_text_view);
-        gameGenre = (TextView) view.findViewById(R.id.genre_text_view);
         gameRate = (TextView) view.findViewById(R.id.rate_text_view);
         gameUserScore = (TextView) view.findViewById(R.id.user_score_text_view);
         gameDeveloper = (TextView) view.findViewById(R.id.game_developer_text_view);
@@ -122,31 +127,31 @@ public class GameDetailsFragment extends Fragment {
 
 
         addGame = (Button) view.findViewById(R.id.add_game_button);
+
+        String text = "Add";
+        int backgroundcolor = R.color.AddButton;
+        //image = (flow.isInstalled)?R.drawable.cancel:R.drawable.cloud;
+
+        int color = getActivity().getResources().getColor(backgroundcolor);
+        GradientDrawable shape = new GradientDrawable();
+        shape.setCornerRadius(10);
+        shape.setColor(color);
+
+        addGame.setBackgroundDrawable(shape);
+        addGame.setText(text);
         addGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Utils.existsInBD(getActivity(),mGame) > 0){
                     QuickUtils.log.d("Exists");
+                    Toast toast = Toast.makeText(getActivity(), "Game already inserted", Toast.LENGTH_SHORT);
+                    toast.show();
                 } else{
-                    Utils.insertInBD(getActivity(), mGame);
-                    QuickUtils.log.d("Added with success");
+
+                    Utils.onCreateDialog(getActivity(), mGame).show();
                 }
             }
         });
-
-        selectGame = (Button) view.findViewById(R.id.select_game_button);
-        selectGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RealmResults<GameDAO> gam = Utils.selectInBD(getActivity());
-                for(int i = 0; i < gam.size(); i++) {
-                    QuickUtils.log.v("game name ->" + gam.get(i).getName());
-                }
-            }
-        });
-
-
-
         return view;
     }
 
@@ -188,5 +193,4 @@ public class GameDetailsFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
 }

@@ -7,26 +7,22 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.activities.GameDetailsActivity;
-import com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity;
 import com.game.metacritic.gamecenter.app.adapters.GameArrayAdapter;
-import com.game.metacritic.gamecenter.app.adapters.VerticalAdapter;
 import com.game.metacritic.gamecenter.app.data.models.Game;
-import com.game.metacritic.gamecenter.app.data.models.GameResponse;
-import com.game.metacritic.gamecenter.app.data.models.Library;
 import com.game.metacritic.gamecenter.app.networking.GetGameService;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
-import com.game.metacritic.gamecenter.app.utils.interfaces.InstallGameButtonClickListener;
+import com.game.metacritic.gamecenter.app.utils.interfaces.AddGameButtonClickListener;
 import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
 
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -77,23 +73,7 @@ public class ShelfSearchFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_shelf_search, container, false);
         gameListView = (ListView) view.findViewById(R.id.game_request_listview);
         setGameArrayAdapter(mGameResponse);
-        /*
-		 * Calling Library & BookItem classes for create list of groups
-		 *  groupbyArrayBookItem return back array of array of items
-		 */
-//        Library lb = new Library();
-//        for (Game item : mGameResponse.results) {
-//            lb.addGameItem(item);
-//        }
 
-
-//        mGroupList = lb.groupbyArrayBookItem(Library.AUTHOR);
-
-//        verticalAdapter  = new VerticalAdapter(view.getContext(), R.layout.shelf_row, mGroupList);
-//        gameListView.setAdapter(verticalAdapter);
-//        verticalAdapter.notifyDataSetChanged();
-
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -140,11 +120,11 @@ public class ShelfSearchFragment extends Fragment {
     }
 
     public void setGameArrayAdapter(final List<Game> list) {
-        gameAdapter = new GameArrayAdapter(getActivity(), list, new InstallGameButtonClickListener() {
+        gameAdapter = new GameArrayAdapter(getActivity(), list, false, new AddGameButtonClickListener() {
             @Override
-            public void onBtnClick(int position, Boolean isDetail) {
+            public void onBtnClick(int position, Boolean isDetail, Boolean isDelete, LinearLayout row) {
                 pos = position;
-                if(list.get(position).id != "0"){
+                if(isDetail && list.get(position).id != "0"){
                     new GetGameService(getActivity(),list.get(position), new TaskCallback<Game>() {
                         @Override
                         public void onSuccess(Game gameResponse) {
@@ -155,6 +135,14 @@ public class ShelfSearchFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }).execute();
+                } else{
+                    if(Utils.existsInBD(getActivity(),list.get(position)) > 0){
+                        QuickUtils.log.d("Exists");
+                        Toast toast = Toast.makeText(getActivity(), "Game already inserted", Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else{
+                        Utils.onCreateDialog(getActivity(), list.get(position)).show();
+                    }
                 }
             }
         });

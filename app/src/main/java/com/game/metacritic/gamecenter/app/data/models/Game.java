@@ -36,6 +36,9 @@ public class Game {
 
 
     private String thumbnail;
+    public boolean isBox;
+    public boolean isCartridge;
+    public boolean isManual;
 
     @SerializedName("score")
     public String score;
@@ -51,7 +54,8 @@ public class Game {
         this.name = name;
     }
 
-    public Game(String name, String score, String url, String rlsdate, String rating, String publisher, String platform, String genre, String thumbnail, String userscore, String developer) {
+    public Game(String id, String name, String score, String url, String rlsdate, String rating, String publisher, String platform, String genre, String thumbnail, String userscore, String developer, boolean box, boolean cartridge, boolean manual) {
+        this.id = id;
         this.name = name;
         this.score = score;
         this.url = url;
@@ -62,6 +66,9 @@ public class Game {
         this.thumbnail = thumbnail;
         this.userscore = userscore;
         this.developer = developer;
+        this.isBox = box;
+        this.isCartridge = cartridge;
+        this.isManual = manual;
     }
 
     public String getThumbnail() {

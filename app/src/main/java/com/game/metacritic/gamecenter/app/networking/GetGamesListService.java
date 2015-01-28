@@ -58,14 +58,13 @@ public class GetGamesListService extends AsyncTask<Void, Void, Void> {
         HttpPost httppost = new HttpPost(url);
 
         try {
+            QuickUtils.log.d("url"+ url);
             String gameXml = httpclient.execute(httppost, new BasicResponseHandler());
             JSONObject jsonObject = XML.toJSONObject(gameXml);
             JSONObject msg = (JSONObject) jsonObject.get("Data");
-            QuickUtils.log.d("teste");
             Gson gson = new Gson();
             GameResponse gameResponse = gson.fromJson(String.valueOf(msg), GameResponse.class);
             mGameResponse = gameResponse.Game;
-            QuickUtils.log.d("teste2");
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {

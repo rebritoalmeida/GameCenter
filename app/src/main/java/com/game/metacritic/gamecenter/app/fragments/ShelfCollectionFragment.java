@@ -9,23 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.game.metacritic.gamecenter.app.R;
-import com.game.metacritic.gamecenter.app.activities.GameDetailsActivity;
-import com.game.metacritic.gamecenter.app.adapters.VerticalAdapter;
+import com.game.metacritic.gamecenter.app.adapters.GameArrayAdapter;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameDAO;
-import com.game.metacritic.gamecenter.app.data.models.GameResponse;
-import com.game.metacritic.gamecenter.app.data.models.Library;
-import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
+import com.game.metacritic.gamecenter.app.utils.interfaces.AddGameButtonClickListener;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-import io.realm.Realm;
 import io.realm.RealmResults;
+import quickutils.core.QuickUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +46,7 @@ public class ShelfCollectionFragment extends Fragment {
     private ArrayAdapter<ArrayList<Game>> verticalAdapter;
     private ListView gameListView;
     ArrayList<ArrayList<Game>> mGroupList;
+    private GameArrayAdapter gameAdapter;
 
     public ShelfCollectionFragment() {
         // Required empty public constructor
@@ -63,9 +67,13 @@ public class ShelfCollectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
+
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_shelf_collection, container, false);
-        gameListView = (ListView) view.findViewById(R.id.game_collection_listview);
+        view = inflater.inflate(R.layout.fragment_shelf_search, container, false);
+        gameListView = (ListView) view.findViewById(R.id.game_request_listview);
+
 
         /*
 		 * Calling Library & BookItem classes for create list of groups
@@ -73,22 +81,16 @@ public class ShelfCollectionFragment extends Fragment {
 		 */
 
         RealmResults<GameDAO> gameDAOs = Utils.selectInBD(getActivity());
-        Library lb = new Library();
+        //Library lb = new Library();
+        ArrayList<Game> lb = new ArrayList<Game>();
 
         for(GameDAO game : gameDAOs){
-            Game item = new Game(game.getName(), game.getScore(), game.getUrl(), game.getRlsdate(), game.getRating(), game.getPublisher(), game.getPlatform(), game.getGenre(), game.getThumbnail(), game.getUserscore(), game.getDeveloper());
+            Game item = new Game(game.getId(), game.getName(), game.getScore(), game.getUrl(), game.getRlsdate(), game.getRating(), game.getPublisher(), game.getPlatform(), game.getGenre(), game.getThumbnail(), game.getUserscore(), game.getDeveloper(), game.isBox(), game.isCartridge(), game.isManual());
 
-                lb.addGameItem(item);
+                lb.add(item);
         }
 
-
-        mGroupList = lb.groupbyArrayBookItem(Library.AUTHOR);
-
-        verticalAdapter  = new VerticalAdapter(view.getContext(), R.layout.shelf_row, mGroupList);
-        gameListView.setAdapter(verticalAdapter);
-        verticalAdapter.notifyDataSetChanged();
-
-        // Inflate the layout for this fragment
+        setGameArrayAdapter(lb);
         return view;
     }
 
@@ -136,5 +138,35 @@ public class ShelfCollectionFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListenerl {
+    }
+
+    public void setGameArrayAdapter(final List<Game> list) {
+        gameAdapter = new GameArrayAdapter(getActivity(), list, true, new AddGameButtonClickListener() {
+            @Override
+            public void onBtnClick(int position, Boolean isDetail, Boolean isDelete, LinearLayout row) {
+                if(!isDelete) {
+                    Game selectedGame = list.get(position);
+
+                    CheckBox check = (CheckBox) row.findViewById(R.id.checkManual);
+                    CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
+                    CheckBox checkCart = (CheckBox) row.findViewById(R.id.checkCartridge);
+
+                    selectedGame.isManual = check.isChecked();
+                    selectedGame.isBox = checkBox.isChecked();
+                    selectedGame.isCartridge = checkCart.isChecked();
+                    int result = Utils.updateInBD(getActivity(), selectedGame);
+                    if(result > 0){
+                        Toast toast = Toast.makeText(getActivity(), selectedGame.name +" Updated", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+
+                    QuickUtils.log.d("checkmanual" + check.isChecked() + "checkBox" + checkBox.isChecked() + "checkcart" + checkCart.isChecked());
+                } else{
+                    Toast toast = Toast.makeText(getActivity(), "Not yet implemented", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+        gameListView.setAdapter(gameAdapter);
     }
 }

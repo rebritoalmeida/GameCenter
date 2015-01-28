@@ -52,17 +52,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:orientation="vertical">
-
                     <Button
                         android:id="@+id/add_game_button"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"/>
-                    <Button
-                        android:id="@+id/select_game_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Select"/>
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:textSize="10dp"
+                        android:drawablePadding="5dp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/white" />
+
                     <TextView
                         android:id="@+id/game_title_text_view"
                         android:layout_width="wrap_content"

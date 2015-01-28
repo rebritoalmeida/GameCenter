@@ -8,6 +8,7 @@
     android:focusable="false"
     android:focusableInTouchMode="false"
     android:clickable="false"
+    android:background="@color/DarkGray"
     android:paddingRight="10dp">
 
     <LinearLayout
@@ -22,42 +23,76 @@
             android:id="@+id/left_bar"
             android:layout_width="5dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@color/Black"/>
+            android:layout_marginRight="10dp" />
 
         <ImageView
             android:id="@+id/image_imagebutton"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:scaleType="fitCenter"
-            android:layout_centerVertical="true"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitCenter" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:background="#00000000"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/title_textview"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:lines="1"
-            android:layout_gravity="center"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:clickable="false"/>
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/title_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:lines="1"
+                android:layout_gravity="center"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+                android:gravity="left"
+                android:layout_weight="0.85" />
+
+            <Button
+                android:id="@+id/action_app_button"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:textSize="10dp"
+                android:drawablePadding="5dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="0dp"
+                android:text="add"
+                android:paddingRight="0dp"
+                android:textColor="@color/white" />
+            <Button
+                android:id="@+id/delete_app_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:textSize="10dp"
+                android:drawablePadding="0dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
+                android:text="X"
+                android:textColor="@color/white"
+                android:clickable="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/platform_textview"
@@ -65,40 +100,54 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:textColor="@color/white"
-            android:gravity="top"
-            android:maxLines="2"
-            android:lines="2"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:lines="1"
             android:layout_gravity="center"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:paddingBottom="10dp"/>
+            android:clickable="false" />
+
         <TextView
             android:id="@+id/release_date_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:textColor="@color/white"
-            android:gravity="top"
-            android:maxLines="2"
-            android:lines="2"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:lines="1"
             android:layout_gravity="center"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:paddingBottom="10dp"/>
+            android:clickable="false" />
 
-        <Button
-            android:id="@+id/action_app_button"
+        <LinearLayout
+            android:id="@+id/checkBoxList"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:textSize="10dp"
-            android:layout_gravity="right"
-            android:drawablePadding="5dp"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/white"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Box"
+                android:checked="true"
+                android:id="@+id/checkBox" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cart"
+                android:checked="true"
+                android:id="@+id/checkCartridge" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manual"
+                android:checked="true"
+                android:id="@+id/checkManual" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -68,8 +68,8 @@ public class GetGameService extends AsyncTask<Void, Void, Void> {
             JSONObject msg1 = (JSONObject) msg.get("Game");
 
             JSONObject images= msg1.getJSONObject("Images");
-            Object item = images.get("boxart");
-            if(!(item instanceof JSONArray)) {
+            Object imageItem = images.get("boxart");
+            if(!(imageItem instanceof JSONArray)) {
                 JSONObject boxart = images.getJSONObject("boxart");
 
                 String box = String.valueOf(boxart);
@@ -81,6 +81,20 @@ public class GetGameService extends AsyncTask<Void, Void, Void> {
 
             }
 
+            if(msg1.has("Genres")) {
+                JSONObject genres = msg1.getJSONObject("Genres");
+                Object genreItem = genres.get("genre");
+                if (!(genreItem instanceof JSONArray)) {
+                    String genre = genres.getString("genre");
+
+                    String gen = "[\"KEY\"]";
+                    gen.replace("KEY", genre);
+                    JSONArray j = new JSONArray(gen);
+                    genres.remove("genre");
+                    genres.put("genre", j);
+
+                }
+            }
 
             QuickUtils.log.d("teste");
             Gson gson = new Gson();
