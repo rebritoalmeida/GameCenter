@@ -81,8 +81,8 @@ public class GameArrayAdapter extends ArrayAdapter<Game> {
         deleteShape.setColor(deleteColor);
 
         GradientDrawable unselectedShape = new GradientDrawable();
-        deleteShape.setCornerRadius(10);
-        deleteShape.setColor(unselectedColor);
+        unselectedShape.setCornerRadius(10);
+        unselectedShape.setColor(unselectedColor);
 
         //Utils.setStoreActionButton(flow, viewHolder.actionButton);
         String text;
@@ -106,7 +106,7 @@ public class GameArrayAdapter extends ArrayAdapter<Game> {
             viewHolder.cartCheckbox.setChecked(game.isCartridge);
             viewHolder.releaseDateTextView.setVisibility(View.GONE);
             viewHolder.deleteButton.setBackgroundDrawable(deleteShape);
-            viewHolder.actionButton.setBackgroundDrawable(unselectedShape);
+            viewHolder.actionButton.setBackgroundDrawable(addShape);
         } else {
             text = "Add";
             viewHolder.checkBoxList.setVisibility(View.GONE);
