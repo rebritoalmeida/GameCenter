@@ -9,27 +9,30 @@
     android:focusableInTouchMode="false"
     android:clickable="false"
     android:background="@color/DarkGray"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
 
     <LinearLayout
-        android:layout_width="105dp"
+        android:layout_width="95dp"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:gravity="right"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="left"
+        android:layout_gravity="right">
 
         <View
             android:id="@+id/left_bar"
             android:layout_width="5dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="5dp" />
 
         <ImageView
             android:id="@+id/image_imagebutton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="fitCenter" />
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:background="@color/transparent"/>
 
     </LinearLayout>
 

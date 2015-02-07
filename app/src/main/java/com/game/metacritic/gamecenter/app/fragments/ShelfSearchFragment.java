@@ -141,7 +141,7 @@ public class ShelfSearchFragment extends Fragment {
                         Toast toast = Toast.makeText(getActivity(), "Game already inserted", Toast.LENGTH_SHORT);
                         toast.show();
                     } else{
-                        Utils.onCreateDialog(getActivity(), list.get(position)).show();
+                        Utils.onCreateDialog(getActivity(), list.get(position), gameAdapter).show();
                     }
                 }
             }

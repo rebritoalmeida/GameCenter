@@ -51,13 +51,6 @@
         <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-d6b967ac9aaba360f46d1108f82995e2316ac8d8.jar" />
     </item>
     <item
-        jar="/Users/ruialmeida/GameCenterGit/app/libs/realm-0.71.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="0757479e5a7aeeb8419cdcad06293c5a2f773c7d">
-        <dex dex="/Users/ruialmeida/GameCenterGit/app/build/intermediates/pre-dexed/debug/realm-0.71.0-d5123eb108348f16dbb47128e605b67acb8b2651.jar" />
-    </item>
-    <item
         jar="/Users/ruialmeida/gamecenter/app/libs/ion-1.3.8.jar"
         jumboMode="false"
         revision="19.1.0"
@@ -189,6 +182,13 @@
         revision="19.1.0"
         sha1="c353086542a6d7886ddd97c147de46fb40ac7dcd">
         <dex dex="/Users/ruialmeida/gamecenter/app/build/intermediates/pre-dexed/debug/classes-c54aff17c071135f5ad9d89319853fad914ff4e1.jar" />
+    </item>
+    <item
+        jar="/Users/ruialmeida/GameCenterGit/app/libs/realm-0.78.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="824ae0b2c1c2c69dae64e7725df53b2e5709db22">
+        <dex dex="/Users/ruialmeida/GameCenterGit/app/build/intermediates/pre-dexed/debug/realm-0.78.0-d1ff6661e2e9c3b9147376a6dfa94667e698bf3c.jar" />
     </item>
     <item
         jar="/Users/ruialmeida/gamecenter/app/build/intermediates/exploded-aar/com.metrekare/contentloadingprogressdialog/0.1/classes.jar"

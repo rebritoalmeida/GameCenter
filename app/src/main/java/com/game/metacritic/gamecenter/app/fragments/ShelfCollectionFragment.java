@@ -162,8 +162,11 @@ public class ShelfCollectionFragment extends Fragment {
 
                     QuickUtils.log.d("checkmanual" + check.isChecked() + "checkBox" + checkBox.isChecked() + "checkcart" + checkCart.isChecked());
                 } else{
-                    Toast toast = Toast.makeText(getActivity(), "Not yet implemented", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getActivity(), "Game deleted", Toast.LENGTH_SHORT);
+                    Utils.deleteRow(getActivity(),list.get(position));
                     toast.show();
+                    gameAdapter.remove(gameAdapter.getItem(position));
+                    gameAdapter.notifyDataSetChanged();
                 }
             }
         });

@@ -108,10 +108,18 @@ public class GameArrayAdapter extends ArrayAdapter<Game> {
             viewHolder.deleteButton.setBackgroundDrawable(deleteShape);
             viewHolder.actionButton.setBackgroundDrawable(addShape);
         } else {
-            text = "Add";
-            viewHolder.checkBoxList.setVisibility(View.GONE);
-            viewHolder.deleteButton.setVisibility(View.GONE);
-            viewHolder.actionButton.setBackgroundDrawable(addShape);
+            if(game.exists(mContext, game) > 0){
+                text = "Add";
+                viewHolder.checkBoxList.setVisibility(View.GONE);
+                viewHolder.deleteButton.setVisibility(View.GONE);
+                viewHolder.actionButton.setVisibility(View.GONE);
+            }
+            else {
+                text = "Add";
+                viewHolder.checkBoxList.setVisibility(View.GONE);
+                viewHolder.deleteButton.setVisibility(View.GONE);
+                viewHolder.actionButton.setBackgroundDrawable(addShape);
+            }
         }
 
         //image = (flow.isInstalled)?R.drawable.cancel:R.drawable.cloud;
@@ -190,8 +198,8 @@ public class GameArrayAdapter extends ArrayAdapter<Game> {
         viewHolder.platformTextView.setAlpha(40);
         viewHolder.platformTextView.setText(game.platform);
 
-        viewHolder.imageImageView.setBackgroundColor(android.graphics.Color.BLACK);
-        viewHolder.imageImageView.getBackground().setAlpha(102);
+        //viewHolder.imageImageView.setBackgroundColor(android.graphics.Color.BLACK);
+        //viewHolder.imageImageView.getBackground().setAlpha(102);
 
         Ion.with(viewHolder.imageImageView)
                 .load(game.getThumbnail());

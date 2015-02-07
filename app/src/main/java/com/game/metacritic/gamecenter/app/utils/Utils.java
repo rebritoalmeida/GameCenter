@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 
 import com.game.metacritic.gamecenter.app.R;
+import com.game.metacritic.gamecenter.app.adapters.GameArrayAdapter;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.data.models.GameDAO;
 import com.google.gson.Gson;
@@ -87,7 +88,7 @@ public class Utils {
         return gam;
     }
 
-    public static int existsInBD(Activity act,Game mGame){
+    public static int existsInBD(Context act,Game mGame){
         Realm realm = Realm.getInstance(act);
         RealmResults<GameDAO> query = realm.where(GameDAO.class)
                             .equalTo("id", mGame.id)
@@ -107,10 +108,12 @@ public class Utils {
                 .equalTo("id", mGame.id)
                 .equalTo("name", mGame.name)
                 .findAll();
-        for (GameDAO object : query) {
-            object.setManual(mGame.isManual);
-            object.setBox(mGame.isBox);
-            object.setCartridge(mGame.isCartridge);
+
+
+        for (int i = 0; i < query.size(); i++) {
+            query.get(i).setManual(mGame.isManual);
+            query.get(i).setBox(mGame.isBox);
+            query.get(i).setCartridge(mGame.isCartridge);
         }
 
         realm.commitTransaction();
@@ -128,6 +131,17 @@ public class Utils {
         }
     }
 
+    public static void deleteRow(Context context, Game game) {
+        Realm realm = Realm.getInstance(context);
+        realm.beginTransaction();
+
+        GameDAO game1 = realm.where(GameDAO.class)
+                .equalTo("id", game.id)
+                .findFirst();
+        game1.removeFromRealm();
+        realm.commitTransaction();
+    }
+
     public static void navigateTo(Activity activity, Class<?> destinationClass) {
         Intent mainIntent = new Intent(activity, destinationClass);
         //mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -143,7 +157,7 @@ public class Utils {
         activity.startActivity(mainIntent);
     }
 
-    public static Dialog onCreateDialog(final Activity activity, final Game game) {
+    public static Dialog onCreateDialog(final Activity activity, final Game game, final GameArrayAdapter gameAdapter) {
         mSelectedItems = new ArrayList();  // Where we track the selected items
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -191,6 +205,9 @@ public class Utils {
                         Toast toast = Toast.makeText(activity, "Game added with success", Toast.LENGTH_SHORT);
                         toast.show();
 
+                        if (gameAdapter != null) {
+                            gameAdapter.notifyDataSetChanged();
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -1,6 +1,10 @@
 package com.game.metacritic.gamecenter.app.data.models;
 
+import android.app.Activity;
+import android.content.Context;
+
 import com.game.metacritic.gamecenter.app.utils.Constants;
+import com.game.metacritic.gamecenter.app.utils.Utils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -73,5 +77,9 @@ public class Game {
 
     public String getThumbnail() {
         return Constants.THUMBNAIL_ENDPOINT.replace("{gameId}", id);
+    }
+
+    public int exists(Context context, Game game){
+       return Utils.existsInBD(context, game);
     }
 }

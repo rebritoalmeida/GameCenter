@@ -1,10 +1,7 @@
 package com.game.metacritic.gamecenter.app.fragments;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -20,16 +17,10 @@ import android.widget.Toast;
 
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.data.models.Game;
-import com.game.metacritic.gamecenter.app.data.models.GameDAO;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
-import com.koushikdutta.async.Util;
 import com.koushikdutta.ion.Ion;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
-import io.realm.RealmResults;
 import quickutils.core.QuickUtils;
 
 /**
@@ -148,7 +139,7 @@ public class GameDetailsFragment extends Fragment {
                     toast.show();
                 } else{
 
-                    Utils.onCreateDialog(getActivity(), mGame).show();
+                    Utils.onCreateDialog(getActivity(), mGame, null).show();
                 }
             }
         });
