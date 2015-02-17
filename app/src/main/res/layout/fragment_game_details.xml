@@ -10,7 +10,7 @@
         android:adjustViewBounds="true"
         android:fitsSystemWindows="true"
         android:scaleType="centerCrop"
-        android:background="@color/Whitesmoke" />
+        android:background="#ff7e8082" />
 
     <ScrollView
         xmlns:tools="http://schemas.android.com/tools"
@@ -63,20 +63,64 @@
                         android:paddingBottom="0dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="10dp"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:layout_gravity="right" />
 
                     <TextView
                         android:id="@+id/game_title_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Title: "
+                        android:text="Title"
                         android:textColor="@color/black"
                         android:clickable="false"
-                        android:paddingTop="10dp"
-                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:lines="1"
+                        />
+                    <TextView
+                        android:id="@+id/game_platform_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wii U"
+                        android:textColor="#ff3e3e3e"
+                        android:gravity="left|center_vertical"
+                        android:clickable="false"
+                        android:lines="1"
+                        />
+                    <TextView
+                        android:id="@+id/game_publisher_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Publisher"
+                        android:textColor="#ff3e3e3e"
+                        android:gravity="left|center_vertical"
+                        android:clickable="false"
 
                         />
-
+                    <LinearLayout
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Score"
+                        android:textColor="@color/black"
+                        android:gravity="left|center_vertical"
+                        android:clickable="false"
+                        android:textStyle="bold"
+                        android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/game_rating_text_view"
+                            android:background="@color/Green"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textSize="20dp"
+                            android:textAlignment="center"
+                            android:text="98"
+                            android:textColor="@color/White"
+                            android:gravity="center" />
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -87,30 +131,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="80"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/game_platform_text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Platform:"
-                    android:textColor="@color/black"
-                    android:gravity="left|center_vertical"
-                    android:clickable="false"
-                    android:paddingTop="10dp"
-                    android:textStyle="bold"
 
-                    />
-                <TextView
-                    android:id="@+id/game_score_text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Score:"
-                    android:textColor="@color/black"
-                    android:gravity="left|center_vertical"
-                    android:clickable="false"
-                    android:paddingTop="10dp"
-                    android:textStyle="bold"
 
-                    />
 
                 <TextView
                     android:id="@+id/release_date_text_view"
@@ -137,7 +159,7 @@
 
                     />
                 <TextView
-                    android:id="@+id/rate_text_view"
+                    android:id="@+id/esrb_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="ESRB: "
@@ -152,19 +174,7 @@
                     android:id="@+id/user_score_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="User score: "
-                    android:textColor="@color/black"
-                    android:gravity="left|center_vertical"
-                    android:clickable="false"
-                    android:paddingTop="10dp"
-                    android:textStyle="bold"
-
-                    />
-                <TextView
-                    android:id="@+id/game_publisher_text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Publisher: "
+                    android:text="User rating: "
                     android:textColor="@color/black"
                     android:gravity="left|center_vertical"
                     android:clickable="false"
