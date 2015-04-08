@@ -42,6 +42,7 @@ public class Utils {
     private static Map<Character, Character> MAP_NORM;
     private static ArrayList<Integer> mSelectedItems;
     private static ContentLoadingProgressDialog dialog;
+    public static String searchTerms;
 
     public static synchronized void init(Context context) {
         QuickUtils.log.d("############## INITING UTILS ############ ");

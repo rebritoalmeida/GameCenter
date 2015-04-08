@@ -1,9 +1,9 @@
 package com.game.metacritic.gamecenter.app.fragments;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +17,11 @@ import com.game.metacritic.gamecenter.app.activities.GameDetailsActivity;
 import com.game.metacritic.gamecenter.app.adapters.GameArrayAdapter;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.networking.GetGameService;
+import com.game.metacritic.gamecenter.app.networking.GetGamesListService;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
 import com.game.metacritic.gamecenter.app.utils.interfaces.AddGameButtonClickListener;
 import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +35,6 @@ import quickutils.core.QuickUtils;
  * {@link ShelfSearchFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * create an instance of this fragment.
- *
  */
 public class ShelfSearchFragment extends Fragment {
 
@@ -48,6 +47,7 @@ public class ShelfSearchFragment extends Fragment {
     ArrayList<ArrayList<Game>> mGroupList;
     private GameArrayAdapter gameAdapter;
     private int pos;
+    private String[] platforms;
 
     public ShelfSearchFragment() {
         // Required empty public constructor
@@ -101,7 +101,10 @@ public class ShelfSearchFragment extends Fragment {
         mListener = null;
     }
 
-
+    public void searchQuery(String s) {
+        QuickUtils.log.d("Estou do lado do fragmento" + s);
+        searchGameService(s);
+    }
 
 
     /**
@@ -109,7 +112,7 @@ public class ShelfSearchFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
@@ -124,28 +127,50 @@ public class ShelfSearchFragment extends Fragment {
             @Override
             public void onBtnClick(int position, Boolean isDetail, Boolean isDelete, LinearLayout row) {
                 pos = position;
-                if(isDetail && list.get(position).id != "0"){
-                    new GetGameService(getActivity(),list.get(position), new TaskCallback<Game>() {
+                if (isDetail && list.get(position).id != "0") {
+                    new GetGameService(getActivity(), list.get(position), new TaskCallback<Game>() {
                         @Override
                         public void onSuccess(Game gameResponse) {
                             Utils.navigateTo(getActivity(), GameDetailsActivity.class, Constants.GAME_KEY, gameResponse);
                         }
+
                         @Override
                         public void onFailure(Exception e) {
                             e.printStackTrace();
                         }
                     }).execute();
-                } else{
-                    if(Utils.existsInBD(getActivity(),list.get(position)) > 0){
+                } else {
+                    if (Utils.existsInBD(getActivity(), list.get(position)) > 0) {
                         QuickUtils.log.d("Exists");
                         Toast toast = Toast.makeText(getActivity(), "Game already inserted", Toast.LENGTH_SHORT);
                         toast.show();
-                    } else{
+                    } else {
                         Utils.onCreateDialog(getActivity(), list.get(position), gameAdapter).show();
                     }
                 }
             }
         });
         gameListView.setAdapter(gameAdapter);
+    }
+
+    public void searchGameService(String gameSearch) {
+        new GetGamesListService(getActivity(), gameSearch, new TaskCallback<ArrayList<Game>>() {
+            @Override
+            public void onSuccess(ArrayList<Game> gameResponse) {
+                if (gameResponse != null && gameResponse.size() > 0) {
+                    mGameResponse = gameResponse;
+                    setGameArrayAdapter(mGameResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+            }
+        }).execute();
+    }
+
+    public void getPlatforms(){
+        platforms =new String[] {"Andra Pradesh","Arunachal Pradesh","Assam","Bihar","Haryana","Himachal Pradesh", "Jammu and Kashmir", "Jharkhand","Karnataka", "Kerala","Tamil Nadu"};
     }
 }

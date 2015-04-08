@@ -15,4 +15,10 @@
         <item>Cartridge</item>
         <item>Manual</item>
     </string-array>
+    <string-array name="platform">
+        <item>"All"</item>
+        <item>"Nintendo"</item>
+        <item>"Mega-Drive"</item>
+        <item>"Sega Saturn"</item>
+    </string-array>
 </resources>
