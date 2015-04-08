@@ -38,8 +38,8 @@ public class GameDetailsFragment extends Fragment {
     private TextView gameTitle;
     private TextView gamePlatform;
     private TextView gameReleaseDate;
-    private TextView gameEsrb;
-    private TextView gameRating;
+    private TextView gameRate;
+    private TextView gameUserScore;
     private TextView gameDeveloper;
     private TextView gameUrl;
     private Button addGame;
@@ -76,8 +76,8 @@ public class GameDetailsFragment extends Fragment {
         gameTitle = (TextView) view.findViewById(R.id.game_title_text_view);
         gamePlatform = (TextView) view.findViewById(R.id.game_platform_text_view);
         gameReleaseDate = (TextView) view.findViewById(R.id.release_date_text_view);
-        gameEsrb = (TextView) view.findViewById(R.id.esrb_text_view);
-        gameRating = (TextView) view.findViewById(R.id.game_rating_text_view);
+        gameRate = (TextView) view.findViewById(R.id.rate_text_view);
+        gameUserScore = (TextView) view.findViewById(R.id.user_score_text_view);
         gameDeveloper = (TextView) view.findViewById(R.id.game_developer_text_view);
         gameUrl = (TextView) view.findViewById(R.id.game_url_text_view);
 
@@ -90,17 +90,17 @@ public class GameDetailsFragment extends Fragment {
         gamePlatform.setText(gamePlatform.getText().toString() + " " + mGame.platform);
         gameReleaseDate.setText(gameReleaseDate.getText().toString() + " " + mGame.releaseDate);
         //gameGenre.setText(gameGenre.getText().toString() + " " + mGame.genres.get(0).genre);
-        gameEsrb.setText(gameEsrb.getText().toString() + " " + mGame.esrb);
+        gameRate.setText(gameRate.getText().toString() + " " + mGame.rating);
 
-        gameRating.setText(mGame.rating);
+        gameUserScore.setText(gameUserScore.getText().toString() + " " + mGame.userscore);
 
-        if(mGame.rating != null) {
-            if (Utils.intervallContains(Constants.LOW[0], Constants.LOW[1], Double.parseDouble(mGame.rating))) {
-                gameRating.setBackgroundColor(Color.RED);
-            } else if (Utils.intervallContains(Constants.MEDIUM[0], Constants.MEDIUM[1], Double.parseDouble(mGame.rating))) {
-                gameRating.setBackgroundColor(Color.YELLOW);
-            } else if (Utils.intervallContains(Constants.HIGHT[0], Constants.HIGHT[1], Double.parseDouble(mGame.rating))) {
-                gameRating.setBackgroundColor(Color.GREEN);
+        if(mGame.userscore != null) {
+            if (Utils.intervallContains(Constants.LOW[0], Constants.LOW[1], Double.parseDouble(mGame.userscore))) {
+                gameUserScore.setBackgroundColor(Color.RED);
+            } else if (Utils.intervallContains(Constants.MEDIUM[0], Constants.MEDIUM[1], Double.parseDouble(mGame.userscore))) {
+                gameUserScore.setBackgroundColor(Color.YELLOW);
+            } else if (Utils.intervallContains(Constants.HIGHT[0], Constants.HIGHT[1], Double.parseDouble(mGame.userscore))) {
+                gameUserScore.setBackgroundColor(Color.GREEN);
             }
         }
 

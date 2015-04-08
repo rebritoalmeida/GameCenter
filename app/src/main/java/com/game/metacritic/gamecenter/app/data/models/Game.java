@@ -1,10 +1,13 @@
 package com.game.metacritic.gamecenter.app.data.models;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 /**
  * Created by Rui Almeida on 21-05-2014.
@@ -22,7 +25,7 @@ public class Game {
     @SerializedName("PlatformId")
     public String platformId;
     @SerializedName("ESRB")
-    public String esrb;
+    public String rating;
     @SerializedName("Overview")
     public String overview;
     @SerializedName("Genres")
@@ -32,7 +35,7 @@ public class Game {
     @SerializedName("Developer")
     public String developer;
     @SerializedName("Rating")
-    public String rating;
+    public String userscore;
 
 
 
@@ -41,7 +44,8 @@ public class Game {
     public boolean isCartridge;
     public boolean isManual;
 
-
+    @SerializedName("score")
+    public String score;
     @SerializedName("url")
     public String url;
     @SerializedName("publisher")
@@ -49,21 +53,22 @@ public class Game {
 
 
 
-    public Game(String rating, String name) {
-        this.rating = rating;
+    public Game(String score, String name) {
+        this.score = score;
         this.name = name;
     }
 
     public Game(String id, String name, String score, String url, String rlsdate, String rating, String publisher, String platform, String genre, String thumbnail, String userscore, String developer, boolean box, boolean cartridge, boolean manual) {
         this.id = id;
         this.name = name;
-        this.rating = score;
+        this.score = score;
         this.url = url;
         this.releaseDate = rlsdate;
-        this.esrb = rating;
+        this.rating = rating;
         this.publisher = publisher;
         this.platform = platform;
         this.thumbnail = thumbnail;
+        this.userscore = userscore;
         this.developer = developer;
         this.isBox = box;
         this.isCartridge = cartridge;
