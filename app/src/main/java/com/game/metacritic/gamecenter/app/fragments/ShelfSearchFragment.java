@@ -14,11 +14,9 @@ import android.widget.Toast;
 
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.activities.GameDetailsActivity;
-import com.game.metacritic.gamecenter.app.activities.ShelfSearchActivity;
 import com.game.metacritic.gamecenter.app.adapters.GameArrayAdapter;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.networking.GetGameService;
-import com.game.metacritic.gamecenter.app.networking.GetGamesListService;
 import com.game.metacritic.gamecenter.app.utils.Constants;
 import com.game.metacritic.gamecenter.app.utils.Utils;
 import com.game.metacritic.gamecenter.app.utils.interfaces.AddGameButtonClickListener;
@@ -149,23 +147,5 @@ public class ShelfSearchFragment extends Fragment {
             }
         });
         gameListView.setAdapter(gameAdapter);
-    }
-
-    public void searchGameService(String gameSearch){
-        new GetGamesListService(getActivity(),gameSearch, new TaskCallback<ArrayList<Game>>() {
-            @Override
-            public void onSuccess(ArrayList<Game> gameResponse) {
-
-                if(gameResponse != null && gameResponse.size() > 0) {
-                    mGameResponse = gameResponse;
-                    setGameArrayAdapter(mGameResponse);
-                }
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                e.printStackTrace();
-            }
-        }).execute();
     }
 }

@@ -1,9 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.game.metacritic.gamecenter.app.ShelfSearchActivity" >
-    <item android:id="@+id/action_search"
-        android:icon="@drawable/abc_ic_search"
-        android:title="String"
-        android:showAsAction="always"
-        android:actionViewClass="android.widget.SearchView"/>
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 </menu>
