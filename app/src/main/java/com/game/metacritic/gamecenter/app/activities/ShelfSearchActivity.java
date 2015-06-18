@@ -1,6 +1,5 @@
 package com.game.metacritic.gamecenter.app.activities;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -12,22 +11,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.data.models.Game;
 import com.game.metacritic.gamecenter.app.fragments.ShelfSearchFragment;
-import com.game.metacritic.gamecenter.app.utils.Constants;
-import com.google.gson.Gson;
+import com.game.metacritic.gamecenter.app.networking.GetGamesListService;
+import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
+
+import java.util.ArrayList;
 
 import quickutils.core.QuickUtils;
 
-public class ShelfSearchActivity extends Activity implements ShelfSearchFragment.OnFragmentInteractionListener, SearchView.OnQueryTextListener {
+public class ShelfSearchActivity extends ParentActivity implements ShelfSearchFragment.OnFragmentInteractionListener, SearchView.OnQueryTextListener {
     private SearchView mSearchView;
     private MenuItem searchItem;
-    private String[] state = { "Cupcake", "Donut", "Eclair", "Froyo",
+    private String[] state = {"Cupcake", "Donut", "Eclair", "Froyo",
             "Gingerbread", "HoneyComb", "IceCream Sandwich", "Jellybean",
-            "kitkat" };
+            "kitkat"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,16 +35,21 @@ public class ShelfSearchActivity extends Activity implements ShelfSearchFragment
         setContentView(R.layout.activity_shelf_search);
 
         String gameItemString = null;
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            gameItemString = extras.getString(Constants.GAME_RESPONSE_KEY);
-        }
-        Game[] itemGameArray = new Gson().fromJson(gameItemString, Game[].class);
+        setupDrawer();
+        searchGameService("Mario", savedInstanceState);
 
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.shelf_search_activity, ShelfSearchFragment.newInstance(itemGameArray)).commit();
-        }
+
+
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            gameItemString = extras.getString(Constants.GAME_RESPONSE_KEY);
+//        }
+//        Game[] itemGameArray = new Gson().fromJson(gameItemString, Game[].class);
+//
+//        if (savedInstanceState == null) {
+//            getFragmentManager().beginTransaction()
+//                    .add(R.id.shelf_search_activity, ShelfSearchFragment.newInstance(itemGameArray)).commit();
+//        }
 
     }
 
@@ -53,12 +58,13 @@ public class ShelfSearchActivity extends Activity implements ShelfSearchFragment
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_actions, menu);
 
+        restoreActionBar("");
+
         searchItem = menu.findItem(R.id.action_search);
 
 
-
         final Spinner s = (Spinner) menu.findItem(R.id.menuSort).getActionView(); // find the spinner
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, state);
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, state);
 
         //  SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActionBar().getThemedContext(), R.array.platform, android.R.layout.simple_spinner_dropdown_item); //  create the adapter from a StringArray
         s.setAdapter(spinnerArrayAdapter); // set the adapter
@@ -119,7 +125,7 @@ public class ShelfSearchActivity extends Activity implements ShelfSearchFragment
 
     @Override
     public boolean onQueryTextSubmit(String s) {
-        QuickUtils.log.d("ENTROUUUUUUUUUU---->"+s);
+        QuickUtils.log.d("ENTROUUUUUUUUUU---->" + s);
         ShelfSearchFragment fragment = (ShelfSearchFragment) getFragmentManager().findFragmentById(R.id.shelf_search_activity);
         fragment.searchQuery(s);
         return false;
@@ -129,4 +135,28 @@ public class ShelfSearchActivity extends Activity implements ShelfSearchFragment
     public boolean onQueryTextChange(String s) {
         return false;
     }
+
+    public void searchGameService(String gameSearch, final Bundle savedInstanceState) {
+        new GetGamesListService(this, gameSearch, new TaskCallback<ArrayList<Game>>() {
+            @Override
+            public void onSuccess(ArrayList<Game> gameResponse) {
+
+                if (gameResponse != null && gameResponse.size() > 0) {
+                    Game[] gameArray = gameResponse.toArray(new Game[gameResponse.size()]);
+                    if (savedInstanceState == null) {
+                        getFragmentManager().beginTransaction()
+                                .add(R.id.shelf_search_activity, ShelfSearchFragment.newInstance(gameArray)).commit();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+            }
+        }).execute();
+    }
+
+
 }
