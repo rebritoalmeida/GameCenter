@@ -9,6 +9,7 @@ public class Constants {
     public static final String GET_GAME_LIST_ENDPOINT = "GetGamesList.php?name={gameTitle}";
     public static final String THUMBNAIL_ENDPOINT = "http://thegamesdb.net/banners/_favcache/_tile-view/boxart/original/front/{gameId}-1.jpg";
     public static final String GET_GAME_ENDPOINT = "GetGame.php?id={gameId}";
+    public static final String GET_PLATFORMS_LIST = "GetPlatformsList.php";
 
 
 

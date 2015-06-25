@@ -14,10 +14,13 @@ import android.widget.Spinner;
 
 import com.game.metacritic.gamecenter.app.R;
 import com.game.metacritic.gamecenter.app.data.models.Game;
+import com.game.metacritic.gamecenter.app.data.models.Platform;
 import com.game.metacritic.gamecenter.app.fragments.ShelfSearchFragment;
 import com.game.metacritic.gamecenter.app.networking.GetGamesListService;
+import com.game.metacritic.gamecenter.app.networking.GetPlatformsList;
 import com.game.metacritic.gamecenter.app.utils.interfaces.TaskCallback;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import quickutils.core.QuickUtils;
@@ -25,9 +28,7 @@ import quickutils.core.QuickUtils;
 public class ShelfSearchActivity extends ParentActivity implements ShelfSearchFragment.OnFragmentInteractionListener, SearchView.OnQueryTextListener {
     private SearchView mSearchView;
     private MenuItem searchItem;
-    private String[] state = {"Cupcake", "Donut", "Eclair", "Froyo",
-            "Gingerbread", "HoneyComb", "IceCream Sandwich", "Jellybean",
-            "kitkat"};
+    private ArrayList<Platform> mPlatforms;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,6 @@ public class ShelfSearchActivity extends ParentActivity implements ShelfSearchFr
         String gameItemString = null;
         setupDrawer();
         searchGameService("Mario", savedInstanceState);
-
 
 
 //        Bundle extras = getIntent().getExtras();
@@ -63,23 +63,12 @@ public class ShelfSearchActivity extends ParentActivity implements ShelfSearchFr
         searchItem = menu.findItem(R.id.action_search);
 
 
-        final Spinner s = (Spinner) menu.findItem(R.id.menuSort).getActionView(); // find the spinner
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, state);
 
-        //  SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActionBar().getThemedContext(), R.array.platform, android.R.layout.simple_spinner_dropdown_item); //  create the adapter from a StringArray
-        s.setAdapter(spinnerArrayAdapter); // set the adapter
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                QuickUtils.log.d("selected->" + s.getSelectedItem().toString());
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
+        getPlatformListService(menu);
 
-        });
+
+
 
         QuickUtils.log.d("callSearch");
         mSearchView = (SearchView) searchItem.getActionView();
@@ -158,5 +147,41 @@ public class ShelfSearchActivity extends ParentActivity implements ShelfSearchFr
         }).execute();
     }
 
+    public void getPlatformListService(final Menu menu) {
+        new GetPlatformsList(this, new TaskCallback<ArrayList<Platform>>() {
+
+            @Override
+            public void onSuccess(ArrayList<Platform> platforms) {
+                mPlatforms = platforms;
+                final Spinner s = (Spinner) menu.findItem(R.id.menuSort).getActionView(); // find the spinner
+//                String [] stockArr = platforms.toArray(new String[platforms.size()]);
+                ArrayList<String> platformNames = new ArrayList<String>();
+                for(Platform platform : mPlatforms){
+                    platformNames.add(platform.name);
+                }
+                final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, platformNames);
+
+                //  SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActionBar().getThemedContext(), R.array.platform, android.R.layout.simple_spinner_dropdown_item); //  create the adapter from a StringArray
+                s.setAdapter(spinnerArrayAdapter); // set the adapter
+                s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                        QuickUtils.log.d("selected->" + s.getSelectedItem().toString());
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+                        // your code here
+                    }
+
+                });
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+            }
+        }).execute();
+    }
 
 }
